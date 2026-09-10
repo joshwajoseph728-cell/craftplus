@@ -154,7 +154,23 @@ export const profileService = {
   },
 
   async getSuggestedUsers(currentUserId?: string): Promise<Profile[]> {
-    const all = getStoredProfiles();
-    return all.filter(p => p.id !== currentUserId).slice(0, 5);
+    if (!isSupabaseConfigured()) {
+      const all = getStoredProfiles();
+      return all.filter(p => p.id !== currentUserId).slice(0, 8);
+    }
+
+    try {
+      let query = supabase.from('profiles').select('*').limit(8);
+      if (currentUserId) {
+        query = query.neq('id', currentUserId);
+      }
+      const { data, error } = await query;
+      if (error || !data || data.length === 0) {
+        return INITIAL_PROFILES.filter(p => p.id !== currentUserId).slice(0, 6);
+      }
+      return data as Profile[];
+    } catch {
+      return INITIAL_PROFILES.filter(p => p.id !== currentUserId).slice(0, 6);
+    }
   }
 };

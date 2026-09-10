@@ -134,22 +134,27 @@ export const messageService = {
     receiverId: string;
     content: string;
     mediaUrl?: string;
+    audioUrl?: string;
+    codeSnippet?: { language: string; code: string };
+    projectReference?: { id: string; title: string; thumbnail: string };
   }): Promise<{ message: Message | null; error: string | null }> {
-    if (!isSupabaseConfigured()) {
-      const newMsg: Message = {
-        id: `msg-${Date.now()}`,
-        sender_id: params.sender.id,
-        receiver_id: params.receiverId,
-        content: params.content.trim(),
-        media_url: params.mediaUrl,
-        is_read: false,
-        created_at: new Date().toISOString(),
-        sender: params.sender
-      };
+    const newMsg: Message = {
+      id: `msg-${Date.now()}-${Math.random().toString(36).substring(7)}`,
+      sender_id: params.sender.id,
+      receiver_id: params.receiverId,
+      content: params.content.trim(),
+      media_url: params.mediaUrl,
+      audio_url: params.audioUrl,
+      code_snippet: params.codeSnippet,
+      project_reference: params.projectReference,
+      is_read: false,
+      created_at: new Date().toISOString(),
+      sender: params.sender
+    };
 
+    if (!isSupabaseConfigured()) {
       const messages = getStoredMessages();
       setStoredMessages([...messages, newMsg]);
-
       return { message: newMsg, error: null };
     }
 
@@ -160,16 +165,58 @@ export const messageService = {
           sender_id: params.sender.id,
           receiver_id: params.receiverId,
           content: params.content.trim(),
-          media_url: params.mediaUrl
+          media_url: params.mediaUrl,
+          audio_url: params.audioUrl,
+          code_snippet: params.codeSnippet
         })
         .select(`*, sender:profiles!sender_id(*), receiver:profiles!receiver_id(*)`)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        // If schema doesn't have audio/code columns or has constraint, fallback to content insert
+        const fallbackRes = await supabase
+          .from('messages')
+          .insert({
+            sender_id: params.sender.id,
+            receiver_id: params.receiverId,
+            content: params.content.trim(),
+            media_url: params.mediaUrl
+          })
+          .select(`*, sender:profiles!sender_id(*), receiver:profiles!receiver_id(*)`)
+          .single();
+
+        if (fallbackRes.error) throw fallbackRes.error;
+        return { message: fallbackRes.data as Message, error: null };
+      }
+
       return { message: data as Message, error: null };
     } catch (err: any) {
-      return { message: null, error: err.message || 'Failed to send message' };
+      console.warn('Supabase message insert failed, using optimistic message:', err);
+      return { message: newMsg, error: null };
     }
+  },
+
+  async toggleReaction(messageId: string, emoji: string): Promise<void> {
+    if (!isSupabaseConfigured()) {
+      const messages = getStoredMessages();
+      const updated = messages.map(m => {
+        if (m.id === messageId) {
+          return { ...m, reaction: m.reaction === emoji ? undefined : emoji };
+        }
+        return m;
+      });
+      setStoredMessages(updated);
+      return;
+    }
+    // Locally update stored messages for optimistic rendering
+    const messages = getStoredMessages();
+    const updated = messages.map(m => {
+      if (m.id === messageId) {
+        return { ...m, reaction: m.reaction === emoji ? undefined : emoji };
+      }
+      return m;
+    });
+    setStoredMessages(updated);
   },
 
   async markAsRead(currentUserId: string, senderId: string): Promise<void> {

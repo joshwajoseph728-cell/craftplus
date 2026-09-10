@@ -136,6 +136,8 @@ export interface Message {
     title: string;
     thumbnail: string;
   };
+  reaction?: string;
+  tempStatus?: 'sending' | 'sent' | 'error';
   is_read: boolean;
   read_at?: string;
   created_at: string;
