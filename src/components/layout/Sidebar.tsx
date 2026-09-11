@@ -163,12 +163,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
               </button>
             </div>
           ) : (
-            <Link
-              to="/auth/login"
-              className="w-full py-2.5 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-center font-bold text-xs shadow hover:opacity-90 block"
-            >
-              Sign In
-            </Link>
+            <div className="space-y-1.5">
+              <Link
+                to="/auth/login"
+                className="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-center font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700 block transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/auth/signup"
+                className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white text-center font-bold text-xs shadow-sm hover:opacity-95 block transition-all"
+              >
+                Create Account
+              </Link>
+            </div>
           )}
         </div>
       </aside>

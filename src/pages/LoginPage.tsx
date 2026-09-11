@@ -66,11 +66,11 @@ export const LoginPage: React.FC = () => {
               </div>
             </div>
             <span className="font-display text-xl font-extrabold tracking-tight text-white">
-              Vibe<span className="bg-gradient-to-r from-brand-400 to-pink-500 bg-clip-text text-transparent">Sphere</span>
+              Craft<span className="bg-gradient-to-r from-brand-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
             </span>
           </Link>
           <h1 className="text-xl font-bold font-display text-white">Welcome Back</h1>
-          <p className="text-xs text-slate-400">Sign in to continue to your creator feed</p>
+          <p className="text-xs text-slate-400">Sign in with your email & password or create a new account</p>
         </div>
 
         {errorMsg && (
@@ -112,29 +112,21 @@ export const LoginPage: React.FC = () => {
               className="w-full h-11 text-sm font-bold shadow-lg"
               isLoading={isSubmitting}
             >
-              <span>Sign In</span>
+              <span>Sign In to CraftPlus</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Button>
           </div>
         </form>
 
-        {/* Quick Demo Sign In Button */}
-        <div className="mt-4">
-          <button
-            type="button"
-            onClick={handleQuickDemo}
-            className="w-full py-2.5 px-3 rounded-xl border border-brand-500/30 bg-brand-500/10 hover:bg-brand-500/20 text-brand-300 text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
+        {/* Create Account Primary Action */}
+        <div className="mt-5 p-3 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
+          <p className="text-xs text-slate-300 font-medium">New to CraftPlus?</p>
+          <Link
+            to="/auth/signup"
+            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 hover:opacity-95 shadow-sm transition-all"
           >
-            <Sparkles className="w-3.5 h-3.5 text-brand-400" />
-            <span>1-Click Instant Demo Login (Jordan Hayes)</span>
-          </button>
-        </div>
-
-        {/* Footer Link */}
-        <div className="mt-6 pt-4 border-t border-white/10 text-center text-xs text-slate-400">
-          <span>Don't have an account? </span>
-          <Link to="/auth/signup" className="font-bold text-brand-400 hover:underline">
-            Join VibeSphere
+            <span>Create a New Account</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>

@@ -104,21 +104,30 @@ export const LandingPage: React.FC = () => {
           Post project case studies with tech stacks, live demos, and code repositories. Connect and direct message with fellow creators, engineers, and collaborators.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
           <Link
             to={user ? "/feed" : "/auth/signup"}
             className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white shadow-xl hover:shadow-glow-brand transition-all hover:scale-105 flex items-center justify-center gap-2 group"
           >
-            <span>Showcase Your Project</span>
+            <span>{user ? "Go to Feed" : "Create New Account"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
 
+          {!user && (
+            <Link
+              to="/auth/login"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-white/10 hover:bg-white/15 text-white border border-white/20 transition-all flex items-center justify-center gap-2"
+            >
+              <span>Log In with Existing Account</span>
+            </Link>
+          )}
+
           <Link
             to="/tech-stack"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 transition-colors flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-4 rounded-2xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-slate-300 border border-white/10 transition-colors flex items-center justify-center gap-2"
           >
-            <Cpu className="w-5 h-5 text-brand-400" />
-            <span>Architecture & DB Schema</span>
+            <Cpu className="w-4 h-4 text-brand-400" />
+            <span>Tech Stack</span>
           </Link>
         </div>
 

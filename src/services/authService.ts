@@ -12,10 +12,10 @@ export const authService = {
         try {
           return JSON.parse(stored);
         } catch {
-          return CURRENT_DEMO_USER;
+          return null;
         }
       }
-      return CURRENT_DEMO_USER;
+      return null;
     }
 
     try {
@@ -45,12 +45,13 @@ export const authService = {
     avatar_url?: string;
   }): Promise<{ user: Profile | null; error: string | null }> {
     if (!isSupabaseConfigured()) {
+      const cleanUsername = params.username.toLowerCase().trim();
       const newUser: Profile = {
-        id: `user-${Date.now()}`,
-        username: params.username.toLowerCase().trim(),
+        id: `user-${cleanUsername}`,
+        username: cleanUsername,
         full_name: params.full_name.trim(),
-        avatar_url: params.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&auto=format&fit=crop&q=80',
-        bio: 'Just joined VibeSphere! ✨',
+        avatar_url: params.avatar_url || `https://api.dicebear.com/7.x/bottts/svg?seed=${cleanUsername}`,
+        bio: 'Creator & Builder on CraftPlus ✨',
         website: '',
         location: '',
         date_of_birth: params.date_of_birth,
@@ -99,13 +100,25 @@ export const authService = {
 
   async signIn(email: string, password: string): Promise<{ user: Profile | null; error: string | null }> {
     if (!isSupabaseConfigured()) {
-      // In demo mode, sign in Jordan Hayes or mock user
-      const demoUser = {
-        ...CURRENT_DEMO_USER,
-        username: email.split('@')[0] || CURRENT_DEMO_USER.username
+      const username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9_.]/g, '_');
+      const userProfile: Profile = {
+        id: `user-${username}`,
+        username: username,
+        full_name: username.replace(/[_.]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+        avatar_url: `https://api.dicebear.com/7.x/bottts/svg?seed=${username}`,
+        bio: 'Creator & Builder on CraftPlus ✨',
+        website: '',
+        location: '',
+        is_private: false,
+        is_verified: false,
+        role: 'user',
+        followers_count: 0,
+        following_count: 0,
+        posts_count: 0,
+        created_at: new Date().toISOString()
       };
-      localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(demoUser));
-      return { user: demoUser, error: null };
+      localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(userProfile));
+      return { user: userProfile, error: null };
     }
 
     try {
@@ -131,11 +144,10 @@ export const authService = {
   },
 
   async signOut(): Promise<void> {
-    if (!isSupabaseConfigured()) {
-      localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
-      return;
+    localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
+    if (isSupabaseConfigured()) {
+      await supabase.auth.signOut();
     }
-    await supabase.auth.signOut();
   },
 
   async resetPassword(email: string): Promise<{ success: boolean; error: string | null }> {

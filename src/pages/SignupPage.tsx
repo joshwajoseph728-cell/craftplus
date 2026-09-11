@@ -99,7 +99,7 @@ export const SignupPage: React.FC = () => {
         throw new Error(res.error || 'Registration failed');
       }
 
-      showToast('Welcome to VibeSphere!', `Account created for @${cleanUsername} ✨`, 'success');
+      showToast('Welcome to CraftPlus!', `Account created for @${cleanUsername} ✨`, 'success');
       navigate('/feed');
     } catch (err: any) {
       setErrorMsg(err.message || 'Registration failed. Please check your credentials.');
@@ -128,11 +128,11 @@ export const SignupPage: React.FC = () => {
               </div>
             </div>
             <span className="font-display text-xl font-extrabold tracking-tight text-white">
-              Vibe<span className="bg-gradient-to-r from-brand-400 to-pink-500 bg-clip-text text-transparent">Sphere</span>
+              Craft<span className="bg-gradient-to-r from-brand-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
             </span>
           </Link>
           <h1 className="text-xl font-bold font-display text-white">Join the Community</h1>
-          <p className="text-xs text-slate-400">Create your account to start sharing vibes & stories</p>
+          <p className="text-xs text-slate-400">Create your creator account to showcase projects, skills & builds</p>
         </div>
 
         {errorMsg && (

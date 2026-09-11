@@ -78,6 +78,37 @@ export const FeedPage: React.FC = () => {
 
   return (
     <div className="max-w-xl mx-auto space-y-4 pb-12">
+      {/* Unauthenticated Guest Invitation Banner */}
+      {!user && (
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 border border-brand-500/30 text-white flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-pink-600 p-[2px] shrink-0">
+              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-brand-400" />
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-bold">Join CraftPlus Community</p>
+              <p className="text-[11px] text-slate-400">Create an account to publish project showcases, like, and direct message builders.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <Link
+              to="/auth/login"
+              className="flex-1 sm:flex-none text-center px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/10 hover:bg-white/15 transition-colors"
+            >
+              Log In
+            </Link>
+            <Link
+              to="/auth/signup"
+              className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white shadow-sm hover:opacity-95 transition-all"
+            >
+              Create Account
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Mobile Mood Switcher */}
       <div className="sm:hidden">
         <MoodSwitcher />
