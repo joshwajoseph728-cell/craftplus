@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotifications } from '../contexts/NotificationContext';
 import { storageService } from '../services/storageService';
@@ -72,7 +72,7 @@ export const SettingsPage: React.FC = () => {
       });
 
       if (!res.success) throw new Error(res.error || 'Failed to update profile');
-      showToast('Profile Updated', 'Your changes have been saved successfully ✨', 'success');
+      showToast('Profile Updated', 'Your changes have been saved successfully âœ¨', 'success');
     } catch (err: any) {
       showToast('Update Failed', err.message || 'Something went wrong', 'warning');
     } finally {
@@ -236,14 +236,14 @@ export const SettingsPage: React.FC = () => {
             label="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
           />
           <Input
             type="password"
             label="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
           />
         </div>
 
@@ -261,3 +261,4 @@ export const SettingsPage: React.FC = () => {
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Profile } from '../types/database.types';
 import { CURRENT_DEMO_USER } from '../lib/mockData';
 
@@ -51,7 +51,7 @@ export const authService = {
         username: cleanUsername,
         full_name: params.full_name.trim(),
         avatar_url: params.avatar_url || `https://api.dicebear.com/7.x/bottts/svg?seed=${cleanUsername}`,
-        bio: 'Creator & Builder on CraftPlus ✨',
+        bio: 'Creator & Builder on CraftPlus âœ¨',
         website: '',
         location: '',
         date_of_birth: params.date_of_birth,
@@ -85,12 +85,46 @@ export const authService = {
       if (error) return { user: null, error: error.message };
       if (!data.user) return { user: null, error: 'Registration failed' };
 
-      // Allow trigger a moment or fetch directly
-      const { data: profile } = await supabase
+      // Ensure profile row exists and update
+      let { data: profile } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', data.user.id)
         .single();
+
+      if (!profile) {
+        const { data: newProf } = await supabase
+          .from('profiles')
+          .insert({
+            id: data.user.id,
+            username: params.username.toLowerCase().trim(),
+            full_name: params.full_name.trim(),
+            avatar_url: params.avatar_url || '',
+            role: 'user',
+            is_online: true,
+            last_seen_at: new Date().toISOString()
+          })
+          .select()
+          .single();
+        profile = newProf;
+      } else {
+        await supabase
+          .from('profiles')
+          .update({ is_online: true, last_seen_at: new Date().toISOString() })
+          .eq('id', data.user.id);
+      }
+
+      // Record audit signup in Supabase
+      try {
+        await supabase.from('auth_logs').insert({
+          user_id: data.user.id,
+          event_type: 'signup',
+          email: params.email,
+          created_at: new Date().toISOString()
+        });
+      } catch {
+        // Table created optionally by user SQL migration
+      }
 
       return { user: profile as Profile, error: null };
     } catch (err: any) {
@@ -106,7 +140,7 @@ export const authService = {
         username: username,
         full_name: username.replace(/[_.]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
         avatar_url: `https://api.dicebear.com/7.x/bottts/svg?seed=${username}`,
-        bio: 'Creator & Builder on CraftPlus ✨',
+        bio: 'Creator & Builder on CraftPlus âœ¨',
         website: '',
         location: '',
         is_private: false,
@@ -130,6 +164,27 @@ export const authService = {
       if (error) return { user: null, error: error.message };
       if (!data.user) return { user: null, error: 'Sign in failed' };
 
+      // Update Supabase profile status to online with current timestamp
+      await supabase
+        .from('profiles')
+        .update({
+          is_online: true,
+          last_seen_at: new Date().toISOString()
+        })
+        .eq('id', data.user.id);
+
+      // Record audit login event in Supabase
+      try {
+        await supabase.from('auth_logs').insert({
+          user_id: data.user.id,
+          event_type: 'login',
+          email,
+          created_at: new Date().toISOString()
+        });
+      } catch {
+        // Silent catch if auth_logs table is not yet migrated
+      }
+
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
@@ -143,9 +198,38 @@ export const authService = {
     }
   },
 
-  async signOut(): Promise<void> {
+  async signOut(userId?: string): Promise<void> {
+    const activeStored = localStorage.getItem(LOCAL_STORAGE_KEY_USER);
+    const storedUser = activeStored ? JSON.parse(activeStored) : null;
+    const targetId = userId || storedUser?.id;
+
     localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
+
     if (isSupabaseConfigured()) {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const currentUserId = targetId || session?.user?.id;
+
+        if (currentUserId) {
+          // Update profile in Supabase to offline
+          await supabase
+            .from('profiles')
+            .update({
+              is_online: false,
+              last_seen_at: new Date().toISOString()
+            })
+            .eq('id', currentUserId);
+
+          // Record audit logout event in Supabase
+          await supabase.from('auth_logs').insert({
+            user_id: currentUserId,
+            event_type: 'logout',
+            created_at: new Date().toISOString()
+          });
+        }
+      } catch {
+        // Continue with signOut
+      }
       await supabase.auth.signOut();
     }
   },
@@ -201,3 +285,4 @@ export const authService = {
     }
   }
 };
+

@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Notification } from '../types/database.types';
 import { INITIAL_NOTIFICATIONS } from '../lib/mockData';
 
@@ -74,3 +74,4 @@ export const notificationService = {
     }
   }
 };
+

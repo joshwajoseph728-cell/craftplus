@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Sparkles, Home } from 'lucide-react';
@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
       <div className="w-16 h-16 rounded-3xl bg-brand-500/10 text-brand-500 flex items-center justify-center mx-auto">
         <Sparkles className="w-8 h-8" />
       </div>
-      <h1 className="text-3xl font-extrabold font-display">404 — Page Not Found</h1>
+      <h1 className="text-3xl font-extrabold font-display">404 â€” Page Not Found</h1>
       <p className="text-xs text-slate-400 max-w-sm">
         The link you followed may be broken, or the page may have been removed.
       </p>
@@ -22,3 +22,4 @@ export const NotFoundPage: React.FC = () => {
     </div>
   );
 };
+

@@ -1,18 +1,18 @@
-import { Profile, Post, Story, Notification, Message, Hashtag, Report, Badge, Challenge, CollabOpportunity } from '../types/database.types';
+﻿import { Profile, Post, Story, Notification, Message, Hashtag, Report, Badge, Challenge, CollabOpportunity } from '../types/database.types';
 
 export const INITIAL_BADGES: Badge[] = [
   {
     id: 'badge-first-project',
     name: 'First Project',
-    icon: '🚀',
-    description: 'Published first public work showcase on CraftPulse.',
+    icon: 'ðŸš€',
+    description: 'Published first public work showcase on CraftPlus.',
     category: 'achievement',
     tier: 'bronze'
   },
   {
     id: 'badge-10-projects',
     name: '10 Projects Master',
-    icon: '🛠️',
+    icon: 'ðŸ› ï¸',
     description: 'Published 10 or more documented engineering case studies and creative works.',
     category: 'achievement',
     tier: 'gold'
@@ -20,7 +20,7 @@ export const INITIAL_BADGES: Badge[] = [
   {
     id: 'badge-rising-creator',
     name: 'Rising Creator',
-    icon: '🌟',
+    icon: 'ðŸŒŸ',
     description: 'Gained high community recognition and project bookmarks.',
     category: 'community',
     tier: 'silver'
@@ -28,7 +28,7 @@ export const INITIAL_BADGES: Badge[] = [
   {
     id: 'badge-challenge-winner',
     name: 'AI Challenge Winner',
-    icon: '🏆',
+    icon: 'ðŸ†',
     description: 'Won 1st place in the Global AI Project Challenge.',
     category: 'challenge',
     tier: 'diamond'
@@ -36,7 +36,7 @@ export const INITIAL_BADGES: Badge[] = [
   {
     id: 'badge-community-builder',
     name: 'Community Builder',
-    icon: '🤝',
+    icon: 'ðŸ¤',
     description: 'Successfully collaborated on multiple multi-creator projects.',
     category: 'community',
     tier: 'gold'
@@ -44,7 +44,7 @@ export const INITIAL_BADGES: Badge[] = [
   {
     id: 'badge-top-creator',
     name: 'Top Creator',
-    icon: '👑',
+    icon: 'ðŸ‘‘',
     description: 'Verified top tier creator demonstrating exceptional craftsmanship.',
     category: 'expertise',
     tier: 'diamond'
@@ -58,7 +58,7 @@ export const INITIAL_PROFILES: Profile[] = [
     full_name: 'Alexa Rivera',
     avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
     headline: 'Lead Product Designer & Creative Technologist',
-    bio: 'Lead Product Designer & Creative Technologist 🌸 Designing scalable design systems, WebGL interactive experiences, and accessible UI kits.',
+    bio: 'Lead Product Designer & Creative Technologist ðŸŒ¸ Designing scalable design systems, WebGL interactive experiences, and accessible UI kits.',
     website: 'https://alexarivera.design',
     github_url: 'https://github.com/alexarivera',
     linkedin_url: 'https://linkedin.com/in/alexarivera',
@@ -85,7 +85,7 @@ export const INITIAL_PROFILES: Profile[] = [
     full_name: 'Leo Chen',
     avatar_url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80',
     headline: 'Senior Full-Stack & 3D Web Graphics Engineer',
-    bio: 'Senior Full-Stack & 3D Web Graphics Engineer ⚡ Crafting WebGPU shaders, real-time procedural environments & high-frequency microservices.',
+    bio: 'Senior Full-Stack & 3D Web Graphics Engineer âš¡ Crafting WebGPU shaders, real-time procedural environments & high-frequency microservices.',
     website: 'https://leochen3d.io',
     github_url: 'https://github.com/leochen3d',
     location: 'Singapore',
@@ -110,7 +110,7 @@ export const INITIAL_PROFILES: Profile[] = [
     full_name: 'Elena Rostova',
     avatar_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80',
     headline: 'AI Research Engineer & Computer Vision Specialist',
-    bio: 'AI Research Engineer & Computer Vision Specialist 🧠 Building open-source neural rendering, diffusion models, and real-time edge AI pipelines.',
+    bio: 'AI Research Engineer & Computer Vision Specialist ðŸ§  Building open-source neural rendering, diffusion models, and real-time edge AI pipelines.',
     website: 'https://elenarostova.ai',
     github_url: 'https://github.com/elenarostova',
     location: 'Berlin, Germany',
@@ -135,7 +135,7 @@ export const INITIAL_PROFILES: Profile[] = [
     full_name: 'Kai Takahashi',
     avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
     headline: 'Audio Software Engineer & Embedded DSP Developer',
-    bio: 'Audio Software Engineer & Embedded DSP Developer 🎛️ Building real-time synthesizer plugins, VST3 DSP engines, and WebAudio instruments.',
+    bio: 'Audio Software Engineer & Embedded DSP Developer ðŸŽ›ï¸ Building real-time synthesizer plugins, VST3 DSP engines, and WebAudio instruments.',
     location: 'Kyoto, Japan',
     skills: ['C++', 'JUCE', 'WebAudio', 'DSP', 'React', 'WebAssembly', 'Ableton Max'],
     is_private: false,
@@ -158,7 +158,7 @@ export const INITIAL_PROFILES: Profile[] = [
     full_name: 'Maya Patel',
     avatar_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
     headline: 'Robotics Engineer & Maker (ROS2 / ESP32)',
-    bio: 'Robotics Researcher & Hardware Maker 🤖 Designing autonomous quadrupeds, custom PCB boards, and computer vision navigation nodes.',
+    bio: 'Robotics Researcher & Hardware Maker ðŸ¤– Designing autonomous quadrupeds, custom PCB boards, and computer vision navigation nodes.',
     website: 'https://mayarobotics.io',
     github_url: 'https://github.com/mayapatel-robotics',
     location: 'Austin, TX',
@@ -185,7 +185,7 @@ export const CURRENT_DEMO_USER: Profile = {
   full_name: 'Jordan Hayes',
   avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&auto=format&fit=crop&q=80',
   headline: 'Full-Stack Architect & Open-Source Creator',
-  bio: 'Full-Stack Software Engineer & Creative Builder ✨ Sharing case studies, architecture patterns, and open-source projects. Open to project collaborations!',
+  bio: 'Full-Stack Software Engineer & Creative Builder âœ¨ Sharing case studies, architecture patterns, and open-source projects. Open to project collaborations!',
   website: 'https://jordanhayes.dev',
   github_url: 'https://github.com/jordanhayes',
   linkedin_url: 'https://linkedin.com/in/jordanhayes',
@@ -208,13 +208,13 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-1',
     user_id: 'user-001',
-    project_title: 'PrismUI — Enterprise Open-Source Design System',
+    project_title: 'PrismUI â€” Enterprise Open-Source Design System',
     category: 'UI/UX & Product Design',
     work_status: 'Completed',
     open_to_collab: true,
     collab_role_needed: 'Three.js / Canvas Specialist',
     caption: 'Proud to open-source PrismUI! Built a zero-runtime CSS-in-JS design system with 60+ accessible components, automated dark-mode token generation, and WCAG AAA color contrast validation. Used by over 12,000 developers worldwide.',
-    experience_learnings: '💡 Key Learnings & Challenges:\n• Challenge: Supporting fluid container queries while maintaining sub-millisecond layout compute.\n• Solution: Implemented native CSS container units combined with semantic custom properties.\n• Result: Reduced component bundle size by 44% compared to standard UI libraries.',
+    experience_learnings: 'ðŸ’¡ Key Learnings & Challenges:\nâ€¢ Challenge: Supporting fluid container queries while maintaining sub-millisecond layout compute.\nâ€¢ Solution: Implemented native CSS container units combined with semantic custom properties.\nâ€¢ Result: Reduced component bundle size by 44% compared to standard UI libraries.',
     tech_stack: ['Figma', 'TypeScript', 'React', 'Tailwind CSS', 'Storybook', 'Radix UI'],
     tools_used: ['Figma Tokens', 'Chromatic', 'GitHub Actions'],
     contributors: [
@@ -268,13 +268,13 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-2',
     user_id: 'user-002',
-    project_title: 'NeuralRay — WebGPU Real-Time 3D Parametric Engine',
+    project_title: 'NeuralRay â€” WebGPU Real-Time 3D Parametric Engine',
     category: 'Creative & 3D Art',
     work_status: 'Completed',
     open_to_collab: true,
     collab_role_needed: 'Rust / Wasm Performance Engineer',
     caption: 'Shipped NeuralRay, a real-time procedural raymarching shader engine running directly in the browser via WebGPU and WGSL shaders. Renders high-density volumetric clouds, titanium structures, and atmospheric light scattering at 120 FPS on Apple Silicon and RTX GPUs.',
-    experience_learnings: '💡 Engineering Challenges & Breakthroughs:\n• Memory bandwidth was choking on 4K multi-sampled shadow passes.\n• Designed a temporal accumulation buffer with depth-guided reprojection, dropping compute passes by 60% with zero visual fidelity loss.',
+    experience_learnings: 'ðŸ’¡ Engineering Challenges & Breakthroughs:\nâ€¢ Memory bandwidth was choking on 4K multi-sampled shadow passes.\nâ€¢ Designed a temporal accumulation buffer with depth-guided reprojection, dropping compute passes by 60% with zero visual fidelity loss.',
     tech_stack: ['WebGPU', 'WGSL', 'Rust', 'WebAssembly', 'Three.js', 'Vite'],
     tools_used: ['Blender 4.2', 'RenderDoc', 'VS Code'],
     live_demo_url: 'https://neuralray.io/demo',
@@ -305,7 +305,7 @@ export const INITIAL_POSTS: Post[] = [
     is_liked: false,
     is_saved: true,
     hashtags: ['webgpu', 'creativecoding', 'shaders', 'rust', '3dgraphics'],
-    challenge_badge: '🏆 AI/3D Challenge Winner',
+    challenge_badge: 'ðŸ† AI/3D Challenge Winner',
     recommendation_reason: 'High engagement in Creative 3D Art',
     is_verified_link: true,
     mood_type: 'work'
@@ -313,12 +313,12 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-3',
     user_id: 'user-003',
-    project_title: 'EdgeVision — Real-time On-Device Object Detection',
+    project_title: 'EdgeVision â€” Real-time On-Device Object Detection',
     category: 'AI & Machine Learning',
     work_status: 'Case Study',
     open_to_collab: false,
     caption: 'Published research and open-source models for quantized YOLOv9 running with ONNX Runtime Web. Achieves 45ms inference latency directly on client CPUs without sending any video frames to remote cloud servers.',
-    experience_learnings: '💡 Takeaways:\n• Privacy-first AI is feasible on client devices when INT8 dynamic quantization and SIMD vector instructions are leveraged.\n• Benchmark accuracy dropped only 1.2% mAP while saving 100% of cloud GPU hosting costs.',
+    experience_learnings: 'ðŸ’¡ Takeaways:\nâ€¢ Privacy-first AI is feasible on client devices when INT8 dynamic quantization and SIMD vector instructions are leveraged.\nâ€¢ Benchmark accuracy dropped only 1.2% mAP while saving 100% of cloud GPU hosting costs.',
     tech_stack: ['PyTorch', 'ONNX', 'Python', 'FastAPI', 'Wasm', 'Computer Vision'],
     tools_used: ['TensorRT', 'Weights & Biases', 'OpenCV'],
     github_url: 'https://github.com/elenarostova/edge-vision-web',
@@ -348,13 +348,13 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-5',
     user_id: 'user-005',
-    project_title: 'StarlightQuad — Open-Source Autonomous Quadruped Robot',
+    project_title: 'StarlightQuad â€” Open-Source Autonomous Quadruped Robot',
     category: 'Robotics & Embedded',
     work_status: 'Completed',
     open_to_collab: true,
     collab_role_needed: 'Reinforcement Learning Simulation Engineer',
     caption: 'Built a 12-DOF compact autonomous robot dog with custom brushless servo actuators, ROS2 Humble navigation stack, and an on-board Intel RealSense depth camera for terrain SLAM. 100% 3D printable chassis!',
-    experience_learnings: '💡 Hardware & Firmware Learnings:\n• Solved actuator thermal throttling by designing aluminum heat-sink stator brackets.\n• Implemented inverse kinematics closed-loop PID control on dual ESP32-S3 microcontrollers synced via CAN bus at 1kHz.',
+    experience_learnings: 'ðŸ’¡ Hardware & Firmware Learnings:\nâ€¢ Solved actuator thermal throttling by designing aluminum heat-sink stator brackets.\nâ€¢ Implemented inverse kinematics closed-loop PID control on dual ESP32-S3 microcontrollers synced via CAN bus at 1kHz.',
     tech_stack: ['ROS 2', 'C++', 'ESP32', 'KiCad', 'SolidWorks', 'Python', 'CAN-Bus'],
     tools_used: ['Bambu Lab X1C', 'Saleae Logic Analyzer', 'PlatformIO'],
     github_url: 'https://github.com/mayapatel-robotics/starlight-quadruped',
@@ -377,7 +377,7 @@ export const INITIAL_POSTS: Post[] = [
     is_liked: true,
     is_saved: true,
     hashtags: ['robotics', 'ros2', 'embedded', 'hardware', 'makers', 'iot'],
-    challenge_badge: '🏆 Hardware Hack Gold Medal',
+    challenge_badge: 'ðŸ† Hardware Hack Gold Medal',
     recommendation_reason: 'Top Maker project of the week',
     is_verified_link: true,
     mood_type: 'work'
@@ -385,11 +385,11 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-fun-1',
     user_id: 'user-002',
-    project_title: 'Cyberpunk Workspace & Ambient Neon Station Tour ✨',
+    project_title: 'Cyberpunk Workspace & Ambient Neon Station Tour âœ¨',
     category: 'Creative & 3D Art',
     work_status: 'Concept',
     open_to_collab: false,
-    caption: 'Late night creative coding vibes! Setup tour of my dual 4K OLED + audio visualizer station. What is your go-to soundtrack for creative flow? 🎧⚡',
+    caption: 'Late night creative coding vibes! Setup tour of my dual 4K OLED + audio visualizer station. What is your go-to soundtrack for creative flow? ðŸŽ§âš¡',
     tech_stack: ['Mechanical Keyboards', 'OLED', 'Nanoleaf', 'Ambient Sound'],
     location: 'Singapore Night Studio',
     audience: 'public',
@@ -417,7 +417,7 @@ export const INITIAL_POSTS: Post[] = [
   {
     id: 'post-fun-2',
     user_id: 'user-004',
-    project_title: 'Ambient Modular Synth Session & Lo-Fi Jams ☕🎛️',
+    project_title: 'Ambient Modular Synth Session & Lo-Fi Jams â˜•ðŸŽ›ï¸',
     category: 'Music & Sound Design',
     work_status: 'Completed',
     open_to_collab: true,
@@ -447,15 +447,79 @@ export const INITIAL_POSTS: Post[] = [
     mood_type: 'normal'
   },
   {
+    id: 'post-fun-3',
+    user_id: 'user-001',
+    project_title: '3D Blender Animation Reel & Claymation Loops ðŸŽ¬ðŸŽ¨',
+    category: 'Creative & 3D Art',
+    work_status: 'Completed',
+    open_to_collab: false,
+    caption: 'Fun little weekend creative experiment! Practiced character rigging, squash-and-stretch physics, and soft studio lighting in Blender. Drop your favorite creative inspiration in the comments! ðŸ‘‡âœ¨',
+    tech_stack: ['Blender', 'Cycles', 'After Effects', 'Procreate'],
+    location: 'Tokyo Creative Studio',
+    audience: 'public',
+    likes_count: 3120,
+    comments_count: 112,
+    created_at: new Date(Date.now() - 6 * 3600000).toISOString(),
+    user: INITIAL_PROFILES[0],
+    media: [
+      {
+        id: 'media-fun-3',
+        post_id: 'post-fun-3',
+        media_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80',
+        media_type: 'image',
+        display_order: 0,
+        alt_text: 'Abstract 3D fluid art and colorful digital sculpture'
+      }
+    ],
+    is_liked: true,
+    is_saved: false,
+    hashtags: ['3danimation', 'blender3d', 'creativereels', 'digitalart', 'cgi'],
+    recommendation_reason: 'Trending in 3D Art & Creative Reels',
+    is_verified_link: true,
+    mood_type: 'normal'
+  },
+  {
+    id: 'post-fun-4',
+    user_id: 'user-005',
+    project_title: 'ASMR Mechanical Keyboard Build & Typing Sound Test âŒ¨ï¸â˜•',
+    category: 'Hardware & IoT',
+    work_status: 'Completed',
+    open_to_collab: false,
+    caption: 'Custom 65% gasket-mount keyboard build with lubed holy panda switches and brass weight. Pure ASMR sound test for your focus sessions! ðŸŽ§',
+    tech_stack: ['Custom Keyboards', 'Soldering', 'Lube Stations', 'Audio Recording'],
+    location: 'Austin Workshop',
+    audience: 'public',
+    likes_count: 4210,
+    comments_count: 156,
+    created_at: new Date(Date.now() - 10 * 3600000).toISOString(),
+    user: INITIAL_PROFILES[4],
+    media: [
+      {
+        id: 'media-fun-4',
+        post_id: 'post-fun-4',
+        media_url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&auto=format&fit=crop&q=80',
+        media_type: 'image',
+        display_order: 0,
+        alt_text: 'Custom mechanical keyboard with glowing keycaps'
+      }
+    ],
+    is_liked: false,
+    is_saved: true,
+    hashtags: ['mechanicalkeyboards', 'asmr', 'desksetup', 'customtech', 'creatorlife'],
+    recommendation_reason: 'Viral Creator Sound Test',
+    is_verified_link: true,
+    mood_type: 'normal'
+  },
+  {
     id: 'post-4',
     user_id: 'current-user-me',
-    project_title: 'CraftPlus — Next-Gen Creator Showcase & Collaboration Platform',
+    project_title: 'CraftPlus â€” Next-Gen Creator Showcase & Collaboration Platform',
     category: 'Software & Web',
     work_status: 'Completed',
     open_to_collab: true,
     collab_role_needed: 'UI/UX Visual Designer',
     caption: 'Proud to present CraftPlus! A social platform tailored for builders, students, designers, and engineers to showcase completed projects, technical case studies, and find collaboration partners. Features PostgreSQL RLS, portfolio mode, direct messaging with code sharing, and AI assistant tools.',
-    experience_learnings: '💡 Architecture Highlights:\n• Supabase RLS policies ensure 100% database-enforced multi-tenant isolation.\n• Realtime CDC triggers distribute instant messaging without spinning up custom WebSocket daemon clusters.\n• Dual-mode architecture guarantees instant zero-config presentation and high uptime.',
+    experience_learnings: 'ðŸ’¡ Architecture Highlights:\nâ€¢ Supabase RLS policies ensure 100% database-enforced multi-tenant isolation.\nâ€¢ Realtime CDC triggers distribute instant messaging without spinning up custom WebSocket daemon clusters.\nâ€¢ Dual-mode architecture guarantees instant zero-config presentation and high uptime.',
     tech_stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vite', 'Docker'],
     tools_used: ['Lucide Icons', 'Vercel', 'Vitest'],
     live_demo_url: 'https://craftplus.vercel.app',
@@ -488,7 +552,7 @@ export const INITIAL_POSTS: Post[] = [
     hashtags: ['fullstack', 'react', 'supabase', 'softwareengineering', 'typescript', 'portfolio'],
     recommendation_reason: 'Official platform showcase',
     is_verified_link: true,
-    mood_type: 'both'
+    mood_type: 'work'
   }
 ];
 
@@ -572,7 +636,7 @@ export const INITIAL_COLLAB_OPPORTUNITIES: CollabOpportunity[] = [
   {
     id: 'collab-1',
     creator: INITIAL_PROFILES[0],
-    project_title: 'PrismUI 2.0 — Spatial & WebGL Component Addon',
+    project_title: 'PrismUI 2.0 â€” Spatial & WebGL Component Addon',
     category: 'UI/UX & Product Design',
     role_needed: 'Three.js / WebGL Visual Engineer',
     skills_required: ['Three.js', 'WebGL', 'TypeScript', 'GLSL'],
@@ -616,7 +680,7 @@ export const INITIAL_STORIES: Story[] = [
     user_id: 'user-001',
     media_url: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80',
     media_type: 'image',
-    caption: 'Live coding the new responsive tokens engine in PrismUI 🚀',
+    caption: 'Live coding the new responsive tokens engine in PrismUI ðŸš€',
     tag_topic: 'Work in Progress',
     created_at: new Date(Date.now() - 4 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 20 * 3600000).toISOString(),
@@ -629,7 +693,7 @@ export const INITIAL_STORIES: Story[] = [
     user_id: 'user-002',
     media_url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80',
     media_type: 'image',
-    caption: 'Benchmarking WebGPU raymarching shaders on M3 Max GPU: 120 FPS locked! ⚡',
+    caption: 'Benchmarking WebGPU raymarching shaders on M3 Max GPU: 120 FPS locked! âš¡',
     tag_topic: 'Tech Milestone',
     created_at: new Date(Date.now() - 6 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 18 * 3600000).toISOString(),
@@ -734,4 +798,5 @@ export const INITIAL_REPORTS: Report[] = [
     post: INITIAL_POSTS[0]
   }
 ];
+
 

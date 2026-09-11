@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Post } from '../../types/database.types';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { Modal } from '../ui/Modal';
@@ -102,3 +102,4 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     </Modal>
   );
 };
+

@@ -191,3 +191,4 @@ export const ChallengeModal: React.FC<ChallengeModalProps> = ({
     </Modal>
   );
 };
+

@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Profile, Hashtag } from '../types/database.types';
 import { INITIAL_PROFILES, CURRENT_DEMO_USER, INITIAL_HASHTAGS } from '../lib/mockData';
 
@@ -174,3 +174,4 @@ export const profileService = {
     }
   }
 };
+

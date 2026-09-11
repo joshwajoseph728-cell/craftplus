@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Profile } from '../../types/database.types';
 import { profileService } from '../../services/profileService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -111,7 +111,7 @@ export const NewChatModal: React.FC<NewChatModalProps> = ({
                     <p className="text-[11px] text-slate-400 truncate">@{item.username}</p>
                     {item.skills && item.skills.length > 0 && (
                       <p className="text-[10px] text-slate-500 truncate mt-0.5">
-                        {item.skills.slice(0, 2).join(' • ')}
+                        {item.skills.slice(0, 2).join(' â€¢ ')}
                       </p>
                     )}
                   </div>
@@ -127,3 +127,4 @@ export const NewChatModal: React.FC<NewChatModalProps> = ({
     </Modal>
   );
 };
+

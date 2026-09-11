@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useChat } from '../contexts/ChatContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Profile } from '../types/database.types';
@@ -18,9 +18,9 @@ export const MessagesPage: React.FC = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-8.5rem)] md:h-[calc(100vh-5.5rem)] rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-surface-cardDark flex shadow-sm">
+    <div className="h-[calc(100dvh-8rem)] md:h-[calc(100vh-5.5rem)] w-full rounded-none md:rounded-3xl overflow-hidden border-0 md:border md:border-slate-200/80 md:dark:border-slate-800/80 bg-white dark:bg-surface-cardDark flex shadow-none md:shadow-sm">
       {/* Left Chat List (hidden on mobile if activeUser is open) */}
-      <div className={`${activeUser ? 'hidden md:flex' : 'flex'} w-full md:w-auto h-full`}>
+      <div className={`${activeUser ? 'hidden md:flex' : 'flex'} w-full md:w-80 lg:w-96 h-full shrink-0`}>
         <ChatList
           conversations={conversations}
           activeUserId={activeUser?.id}
@@ -67,3 +67,4 @@ export const MessagesPage: React.FC = () => {
     </div>
   );
 };
+

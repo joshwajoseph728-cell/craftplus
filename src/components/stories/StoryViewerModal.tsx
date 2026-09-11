@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { StoryGroup } from '../../types/database.types';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
@@ -273,3 +273,4 @@ export const StoryViewerModal: React.FC<StoryViewerModalProps> = ({
     </div>
   );
 };
+

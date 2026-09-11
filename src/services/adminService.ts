@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Report } from '../types/database.types';
 import { INITIAL_REPORTS, INITIAL_PROFILES, INITIAL_POSTS } from '../lib/mockData';
 
@@ -132,3 +132,4 @@ export const adminService = {
     }
   }
 };
+

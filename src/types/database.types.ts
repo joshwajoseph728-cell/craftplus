@@ -1,4 +1,4 @@
-export type UserRole = 'user' | 'moderator' | 'admin';
+﻿export type UserRole = 'user' | 'moderator' | 'admin';
 
 export type ProjectCategory = 
   | 'Software & Web'
@@ -245,3 +245,4 @@ export interface Report {
   post?: Post;
   reported_user?: Profile;
 }
+

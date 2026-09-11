@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Notification } from '../types/database.types';
 import { notificationService } from '../services/notificationService';
 import { useAuth } from './AuthContext';
@@ -116,3 +116,4 @@ export const useNotifications = (): NotificationContextType => {
   }
   return context;
 };
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { Input, Textarea } from '../ui/Input';
@@ -43,7 +43,7 @@ export const CollabRequestModal: React.FC<CollabRequestModalProps> = ({
 
     setIsSubmitting(true);
     try {
-      const fullContent = `🤝 Collaboration Proposal for "${project?.project_title || 'your projects'}":\n• Proposed Role: ${role}\n• Message: ${message || 'Excited to contribute to your work!'}`;
+      const fullContent = `ðŸ¤ Collaboration Proposal for "${project?.project_title || 'your projects'}":\nâ€¢ Proposed Role: ${role}\nâ€¢ Message: ${message || 'Excited to contribute to your work!'}`;
 
       const { error } = await messageService.sendMessage({
         sender: user,
@@ -61,7 +61,7 @@ export const CollabRequestModal: React.FC<CollabRequestModalProps> = ({
       await refreshConversations();
 
       showToast(
-        'Collaboration Proposal Sent! 🚀',
+        'Collaboration Proposal Sent! ðŸš€',
         `Your message has been delivered directly to ${targetUser.full_name}`,
         'success'
       );
@@ -89,7 +89,7 @@ export const CollabRequestModal: React.FC<CollabRequestModalProps> = ({
           <Avatar src={targetUser.avatar_url} alt={targetUser.full_name} size="md" isVerified={targetUser.is_verified} />
           <div className="min-w-0">
             <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{targetUser.full_name}</p>
-            <p className="text-[11px] text-slate-400 truncate">@{targetUser.username} • {targetUser.skills?.[0] || 'Creator'}</p>
+            <p className="text-[11px] text-slate-400 truncate">@{targetUser.username} â€¢ {targetUser.skills?.[0] || 'Creator'}</p>
           </div>
         </div>
 
@@ -135,3 +135,4 @@ export const CollabRequestModal: React.FC<CollabRequestModalProps> = ({
     </Modal>
   );
 };
+

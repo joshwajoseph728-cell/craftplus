@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Conversation, Profile } from '../../types/database.types';
 import { Avatar } from '../ui/Avatar';
 import { SearchInput } from '../ui/Input';
@@ -164,7 +164,7 @@ export const ChatList: React.FC<ChatListProps> = ({
             <div className="space-y-1">
               <p className="text-[10px] font-bold uppercase tracking-wider text-brand-500 px-2 pt-1 flex items-center gap-1">
                 <Search className="w-3 h-3" />
-                <span>Search All Builders on CraftPulse</span>
+                <span>Search All Builders on CraftPlus</span>
               </p>
 
               {isSearchingGlobal ? (
@@ -251,7 +251,7 @@ export const ChatList: React.FC<ChatListProps> = ({
                         'text-xs truncate pr-2',
                         c.unreadCount > 0 ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'
                       )}>
-                        {c.lastMessage.media_url ? '📷 [Photo Attached]' : c.lastMessage.code_snippet ? '💻 [Code Snippet]' : c.lastMessage.audio_url ? '🎙️ [Voice Note]' : truncateText(c.lastMessage.content, 36)}
+                        {c.lastMessage.media_url ? 'ðŸ“· [Photo Attached]' : c.lastMessage.code_snippet ? 'ðŸ’» [Code Snippet]' : c.lastMessage.audio_url ? 'ðŸŽ™ï¸ [Voice Note]' : truncateText(c.lastMessage.content, 36)}
                       </p>
 
                       {c.unreadCount > 0 && (
@@ -270,3 +270,4 @@ export const ChatList: React.FC<ChatListProps> = ({
     </div>
   );
 };
+

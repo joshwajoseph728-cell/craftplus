@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Comment, Profile } from '../types/database.types';
 import { INITIAL_PROFILES } from '../lib/mockData';
 
@@ -10,7 +10,7 @@ const INITIAL_MOCK_COMMENTS: Record<string, Comment[]> = {
       id: 'c-1',
       user_id: 'user-002',
       post_id: 'post-1',
-      content: 'The lighting reflection on the wet asphalt is unbelievable! 🔥',
+      content: 'The lighting reflection on the wet asphalt is unbelievable! ðŸ”¥',
       likes_count: 8,
       created_at: new Date(Date.now() - 3600000).toISOString(),
       user: INITIAL_PROFILES[1],
@@ -194,3 +194,4 @@ export const commentService = {
     }
   }
 };
+

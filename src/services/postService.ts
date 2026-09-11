@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Post, PostMedia, Profile, ProjectCategory } from '../types/database.types';
 import { INITIAL_POSTS, CURRENT_DEMO_USER } from '../lib/mockData';
 
@@ -67,9 +67,9 @@ export const postService = {
     }
 
     if (mood === 'work') {
-      posts = posts.filter(p => p.mood_type === 'work' || p.mood_type === 'both' || !p.mood_type);
+      posts = posts.filter(p => p.mood_type === 'work' || !p.mood_type);
     } else if (mood === 'normal') {
-      posts = posts.filter(p => p.mood_type === 'normal' || p.mood_type === 'both');
+      posts = posts.filter(p => p.mood_type === 'normal');
     }
 
     if (category && category !== 'All') {
@@ -301,3 +301,4 @@ export const postService = {
     }
   }
 };
+

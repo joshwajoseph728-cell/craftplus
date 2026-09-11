@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { StoryGroup } from '../types/database.types';
 import { storyService } from '../services/storyService';
 import { useAuth } from '../contexts/AuthContext';
@@ -43,3 +43,4 @@ export function useStories() {
     markViewed
   };
 }
+

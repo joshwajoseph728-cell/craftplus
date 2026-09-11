@@ -78,3 +78,4 @@ export const MoodSwitcher: React.FC<MoodSwitcherProps> = ({ compact = false }) =
     </div>
   );
 };
+

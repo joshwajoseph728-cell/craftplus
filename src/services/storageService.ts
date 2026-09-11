@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured, getStoragePublicUrl } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured, getStoragePublicUrl } from '../lib/supabase';
 
 const MAX_IMAGE_SIZE_MB = 5;
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/webm'];
@@ -66,3 +66,4 @@ export const storageService = {
     }
   }
 };
+

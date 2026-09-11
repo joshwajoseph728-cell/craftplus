@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -99,7 +99,7 @@ export const SignupPage: React.FC = () => {
         throw new Error(res.error || 'Registration failed');
       }
 
-      showToast('Welcome to CraftPlus!', `Account created for @${cleanUsername} ✨`, 'success');
+      showToast('Welcome to CraftPlus!', `Account created for @${cleanUsername} âœ¨`, 'success');
       navigate('/feed');
     } catch (err: any) {
       setErrorMsg(err.message || 'Registration failed. Please check your credentials.');
@@ -208,7 +208,7 @@ export const SignupPage: React.FC = () => {
                 label="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 required
               />
               {password && (
@@ -265,3 +265,4 @@ export const SignupPage: React.FC = () => {
     </div>
   );
 };
+

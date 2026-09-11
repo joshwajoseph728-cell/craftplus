@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react';
+﻿import React, { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 import { Search, X } from 'lucide-react';
 
@@ -117,3 +117,4 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 );
 
 SearchInput.displayName = 'SearchInput';
+

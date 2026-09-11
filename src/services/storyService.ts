@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Story, StoryGroup, Profile } from '../types/database.types';
 import { INITIAL_STORIES } from '../lib/mockData';
 
@@ -149,3 +149,4 @@ export const storyService = {
     }
   }
 };
+

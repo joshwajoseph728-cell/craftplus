@@ -558,3 +558,4 @@ export const PostCard: React.FC<PostCardProps> = ({
     </>
   );
 };
+

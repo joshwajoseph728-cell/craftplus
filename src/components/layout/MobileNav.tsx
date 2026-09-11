@@ -115,3 +115,4 @@ export const MobileNav: React.FC<MobileNavProps> = ({ onOpenCreate }) => {
     </nav>
   );
 };
+

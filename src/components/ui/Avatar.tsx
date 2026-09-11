@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { cn } from '../../lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -98,3 +98,4 @@ export const Avatar: React.FC<AvatarProps> = ({
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
         throw new Error(res.error || 'Invalid credentials');
       }
 
-      showToast('Welcome back!', 'Successfully signed in to VibeSphere ✨', 'success');
+      showToast('Welcome back!', 'Successfully signed in to VibeSphere âœ¨', 'success');
       navigate('/feed');
     } catch (err: any) {
       setErrorMsg(err.message || 'Failed to sign in. Please verify your email and password.');
@@ -100,7 +100,7 @@ export const LoginPage: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               required
             />
           </div>
@@ -133,3 +133,4 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
+

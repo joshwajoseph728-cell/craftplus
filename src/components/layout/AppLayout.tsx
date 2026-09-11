@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+﻿import React, { useState, ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 import { MobileNav } from './MobileNav';
@@ -6,6 +6,8 @@ import { RightPanel } from './RightPanel';
 import { CreatePostModal } from '../create/CreatePostModal';
 import { ToastContainer } from '../ui/ToastContainer';
 import { usePosts } from '../../hooks/usePosts';
+
+import { cn } from '../../lib/utils';
 
 export interface AppLayoutProps {
   children: ReactNode;
@@ -30,7 +32,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
         <Navbar onOpenCreate={() => setIsCreateModalOpen(true)} />
 
         <div className="flex-1 flex justify-center w-full">
-          <main className="w-full max-w-4xl px-4 py-6">
+          <main className={cn('w-full', showRightPanel ? 'max-w-4xl px-4 py-6' : 'max-w-5xl p-0 md:px-4 md:py-6')}>
             {children}
           </main>
 
@@ -54,3 +56,4 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
     </div>
   );
 };
+

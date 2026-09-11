@@ -132,3 +132,4 @@ export const BadgeList: React.FC<BadgeListProps> = ({ badges, compact = false })
     </div>
   );
 };
+

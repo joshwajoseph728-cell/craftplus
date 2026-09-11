@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNotifications } from '../contexts/NotificationContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Avatar } from '../components/ui/Avatar';
@@ -142,3 +142,4 @@ export const NotificationsPage: React.FC = () => {
     </div>
   );
 };
+

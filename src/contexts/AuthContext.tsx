@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Profile } from '../types/database.types';
 import { authService } from '../services/authService';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
@@ -87,8 +87,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = async () => {
-    await authService.signOut();
+    const currentId = user?.id;
     setUser(null);
+    await authService.signOut(currentId);
   };
 
   const updateProfile = async (updates: Partial<Profile>) => {
@@ -128,3 +129,4 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
+

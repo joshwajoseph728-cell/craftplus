@@ -63,3 +63,4 @@ export const badgeService = {
     return INITIAL_BADGES;
   }
 };
+

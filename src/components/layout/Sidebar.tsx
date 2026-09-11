@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
@@ -6,6 +6,7 @@ import { useChat } from '../../contexts/ChatContext';
 import { Avatar } from '../ui/Avatar';
 import { AICreatorModal } from '../ai/AICreatorModal';
 import { MoodSwitcher } from './MoodSwitcher';
+import { AccountSearchModal } from '../search/AccountSearchModal';
 import {
   Home,
   Compass,
@@ -21,7 +22,8 @@ import {
   Trophy,
   Users,
   Bot,
-  Sparkles
+  Sparkles,
+  Search
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -35,6 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
   const { unreadCount: chatCount } = useChat();
 
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const navItems = [
     { label: 'Project Feed', path: '/feed', icon: Home },
@@ -99,6 +102,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
 
           {/* Navigation Items */}
           <nav className="space-y-1 px-2">
+            {/* Search Accounts Button */}
+            <button
+              type="button"
+              onClick={() => setIsSearchModalOpen(true)}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 group"
+            >
+              <div className="flex items-center gap-3">
+                <Search className="w-4 h-4 text-brand-500 transition-transform group-hover:scale-110" />
+                <span>Search Accounts</span>
+              </div>
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-500">
+                Find
+              </span>
+            </button>
+
             {navItems.map(item => (
               <NavLink
                 key={item.path}
@@ -186,6 +204,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
         isOpen={isAIModalOpen}
         onClose={() => setIsAIModalOpen(false)}
       />
+
+      {/* Account Search Modal */}
+      <AccountSearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+      />
     </>
   );
 };
+

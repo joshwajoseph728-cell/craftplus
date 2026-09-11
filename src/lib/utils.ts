@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+﻿import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { formatDistanceToNowStrict, format, isToday, isYesterday } from 'date-fns';
 
@@ -74,3 +74,4 @@ export function truncateText(text: string, maxLength: number = 100): string {
   if (!text || text.length <= maxLength) return text;
   return text.slice(0, maxLength) + '...';
 }
+

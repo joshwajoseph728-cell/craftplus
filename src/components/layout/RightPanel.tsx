@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Profile, Hashtag } from '../../types/database.types';
@@ -76,7 +76,7 @@ export const RightPanel: React.FC = () => {
                       @{item.username}
                     </p>
                     <p className="text-[10px] text-slate-400 truncate">
-                      {formatCompactNumber(item.followers_count || 0)} followers • {item.skills?.[0] || 'Engineer'}
+                      {formatCompactNumber(item.followers_count || 0)} followers â€¢ {item.skills?.[0] || 'Engineer'}
                     </p>
                   </div>
                 </Link>
@@ -132,7 +132,7 @@ export const RightPanel: React.FC = () => {
           <span>Capstone Project Showcase</span>
         </div>
         <p className="text-[11px] text-slate-400 leading-relaxed">
-          CraftPulse Full-Stack Social Architecture with PostgreSQL RLS Security, 24h Stories, Realtime Direct Messaging, and Media Buckets.
+          CraftPlus Full-Stack Social Architecture with PostgreSQL RLS Security, 24h Stories, Realtime Direct Messaging, and Media Buckets.
         </p>
         <Link
           to="/tech-stack"
@@ -146,15 +146,16 @@ export const RightPanel: React.FC = () => {
       <div className="text-[11px] text-slate-400 dark:text-slate-600 space-y-1 pt-2">
         <div className="flex flex-wrap gap-x-2 gap-y-1">
           <Link to="/tech-stack" className="hover:underline">About</Link>
-          <span>•</span>
+          <span>â€¢</span>
           <a href="https://supabase.com" target="_blank" rel="noreferrer" className="hover:underline">Supabase</a>
-          <span>•</span>
+          <span>â€¢</span>
           <span className="hover:underline">Privacy</span>
-          <span>•</span>
+          <span>â€¢</span>
           <span className="hover:underline">Terms</span>
         </div>
-        <p>© 2026 CraftPulse Inc. All rights reserved.</p>
+        <p>Â© 2026 CraftPlus Inc. All rights reserved.</p>
       </div>
     </aside>
   );
 };
+

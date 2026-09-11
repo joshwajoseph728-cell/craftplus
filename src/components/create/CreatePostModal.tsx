@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { storageService } from '../../services/storageService';
@@ -231,7 +231,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
       post.collab_role_needed = collabRoleNeeded;
 
       setUploadProgress(100);
-      showToast('Project Showcase Published!', 'Your work is live on the global feed & creator portfolio ✨', 'success');
+      showToast('Project Showcase Published!', 'Your work is live on the global feed & creator portfolio âœ¨', 'success');
 
       if (onPostCreated) {
         onPostCreated(post);
@@ -454,7 +454,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
 
           {/* Experience & Challenges Overcome */}
           <Textarea
-            label="💡 Case Study & Key Learnings (Architecture Challenges)"
+            label="ðŸ’¡ Case Study & Key Learnings (Architecture Challenges)"
             rows={3}
             value={experienceLearnings}
             onChange={(e) => setExperienceLearnings(e.target.value)}
@@ -680,3 +680,4 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
     </>
   );
 };
+

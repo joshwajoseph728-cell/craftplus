@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -78,7 +78,7 @@ export const LandingPage: React.FC = () => {
                   to="/auth/signup"
                   className="px-5 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white shadow-lg hover:shadow-glow-brand transition-all hover:scale-105"
                 >
-                  Join CraftPulse
+                  Join CraftPlus
                 </Link>
               </div>
             )}
@@ -139,7 +139,7 @@ export const LandingPage: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-rose-500" />
                 <div className="w-3 h-3 rounded-full bg-amber-500" />
                 <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                <span className="text-xs font-mono text-slate-400 ml-2">craftpulse.app/feed</span>
+                <span className="text-xs font-mono text-slate-400 ml-2">CraftPlus.app/feed</span>
               </div>
               <span className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
@@ -157,14 +157,14 @@ export const LandingPage: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-brand-500 text-white w-max mb-1">WebGPU Engine</span>
                   <p className="text-xs font-bold text-white">@leo_cyber</p>
-                  <p className="text-[11px] text-slate-300">120 FPS Procedural Shader Engine ⚡</p>
+                  <p className="text-[11px] text-slate-300">120 FPS Procedural Shader Engine âš¡</p>
                 </div>
               </div>
 
               <div className="space-y-3 flex flex-col justify-center">
                 <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
                   <div className="flex items-center justify-between text-xs font-bold text-white mb-1">
-                    <span>💻 Tech Stack Embedded</span>
+                    <span>ðŸ’» Tech Stack Embedded</span>
                     <span className="text-brand-400">TypeScript + Rust</span>
                   </div>
                   <p className="text-[11px] text-slate-400">Every post includes clickable tech tags, live demo buttons, and GitHub repositories.</p>
@@ -172,7 +172,7 @@ export const LandingPage: React.FC = () => {
 
                 <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
                   <div className="flex items-center justify-between text-xs font-bold text-white mb-1">
-                    <span>💡 Experience & Learnings</span>
+                    <span>ðŸ’¡ Experience & Learnings</span>
                     <span className="text-pink-400">Case Study</span>
                   </div>
                   <p className="text-[11px] text-slate-400">Expandable insights covering technical hurdles, architecture choices, and benchmarks.</p>
@@ -191,7 +191,7 @@ export const LandingPage: React.FC = () => {
               Engineered for project collaboration & portfolios
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
-              Explore how CraftPulse empowers engineers and creators to build in public.
+              Explore how CraftPlus empowers engineers and creators to build in public.
             </p>
           </div>
 
@@ -263,7 +263,7 @@ export const LandingPage: React.FC = () => {
       <section className="relative z-10 py-20 px-6 text-center">
         <div className="max-w-4xl mx-auto p-10 md:p-16 rounded-3xl bg-gradient-to-r from-brand-950/90 via-purple-950/90 to-pink-950/90 border border-brand-500/30 shadow-2xl space-y-6">
           <h2 className="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Start Showcasing on CraftPulse
+            Start Showcasing on CraftPlus
           </h2>
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Join thousands of creators sharing their projects, case studies, and engineering breakthroughs.
@@ -273,7 +273,7 @@ export const LandingPage: React.FC = () => {
               to={user ? "/feed" : "/auth/signup"}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-brand-600 via-pink-600 to-accent-500 text-white shadow-xl hover:shadow-glow-brand transition-all hover:scale-105"
             >
-              <span>{user ? 'Enter CraftPulse' : 'Create Free Builder Account'}</span>
+              <span>{user ? 'Enter CraftPlus' : 'Create Free Builder Account'}</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
@@ -282,15 +282,16 @@ export const LandingPage: React.FC = () => {
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/10 py-10 px-6 text-center text-xs text-slate-500 space-y-3">
-        <p>© 2026 CraftPulse — Full-Stack College Capstone Project. Built with React, TypeScript, Tailwind, and Supabase.</p>
+        <p>Â© 2026 CraftPlus â€” Full-Stack College Capstone Project. Built with React, TypeScript, Tailwind, and Supabase.</p>
         <div className="flex justify-center gap-4 text-slate-400">
           <Link to="/tech-stack" className="hover:text-white">Architecture</Link>
-          <span>•</span>
+          <span>â€¢</span>
           <Link to="/explore" className="hover:text-white">Explore</Link>
-          <span>•</span>
+          <span>â€¢</span>
           <a href="https://supabase.com" target="_blank" rel="noreferrer" className="hover:text-white">Supabase</a>
         </div>
       </footer>
     </div>
   );
 };
+

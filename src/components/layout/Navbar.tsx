@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -6,7 +6,8 @@ import { useNotifications } from '../../contexts/NotificationContext';
 import { useChat } from '../../contexts/ChatContext';
 import { Avatar } from '../ui/Avatar';
 import { MoodSwitcher } from './MoodSwitcher';
-import { Sun, Moon, Bell, MessageSquare, PlusSquare, Sparkles, ShieldAlert, Cpu, Activity } from 'lucide-react';
+import { AccountSearchModal } from '../search/AccountSearchModal';
+import { Sun, Moon, Bell, MessageSquare, PlusSquare, Sparkles, ShieldAlert, Cpu, Activity, Search } from 'lucide-react';
 
 export interface NavbarProps {
   onOpenCreate?: () => void;
@@ -17,29 +18,41 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCreate }) => {
   const { theme, toggleTheme } = useTheme();
   const { unreadCount: notifCount } = useNotifications();
   const { unreadCount: chatCount } = useChat();
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link to={user ? "/feed" : "/"} className="flex items-center gap-2.5 select-none">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-sm">
-            <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-              <Activity className="w-5 h-5 text-white" />
+    <>
+      <header className="sticky top-0 z-30 w-full bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <Link to={user ? "/feed" : "/"} className="flex items-center gap-2.5 select-none shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-sm">
+              <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
+                <Activity className="w-5 h-5 text-white" />
+              </div>
             </div>
+            <span className="font-display text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Craft<span className="bg-gradient-to-r from-brand-500 via-pink-500 to-accent-500 bg-clip-text text-transparent">Pulse</span>
+            </span>
+          </Link>
+
+          {/* Search Bar / Trigger */}
+          <button
+            onClick={() => setIsSearchModalOpen(true)}
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-brand-500/50 transition-all max-w-[200px] md:max-w-xs w-full mx-2 md:mx-4"
+            title="Search creators, usernames, or skills"
+          >
+            <Search className="w-4 h-4 text-brand-500 shrink-0" />
+            <span className="text-xs truncate font-medium">Search accounts...</span>
+          </button>
+
+          {/* Center: Mood Switcher */}
+          <div className="hidden md:block">
+            <MoodSwitcher compact={true} />
           </div>
-          <span className="font-display text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Craft<span className="bg-gradient-to-r from-brand-500 via-pink-500 to-accent-500 bg-clip-text text-transparent">Pulse</span>
-          </span>
-        </Link>
 
-        {/* Center: Mood Switcher */}
-        <div className="hidden sm:block">
-          <MoodSwitcher compact={true} />
-        </div>
-
-        {/* Action Controls */}
-        <div className="flex items-center gap-2 md:gap-3">
+          {/* Action Controls */}
+          <div className="flex items-center gap-2 md:gap-3 shrink-0">
           {/* Tech Architecture Link */}
           <Link
             to="/tech-stack"
@@ -130,12 +143,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCreate }) => {
                 to="/auth/signup"
                 className="px-4 py-2 text-xs md:text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-600 to-pink-600 text-white shadow-sm hover:opacity-90"
               >
-                Join CraftPulse
+                Join CraftPlus
               </Link>
             </div>
           )}
         </div>
       </div>
     </header>
+
+    {/* Global Account Search Modal */}
+    <AccountSearchModal
+      isOpen={isSearchModalOpen}
+      onClose={() => setIsSearchModalOpen(false)}
+    />
+  </>
   );
 };
+

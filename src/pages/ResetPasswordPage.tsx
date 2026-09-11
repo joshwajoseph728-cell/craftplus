@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../services/authService';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -60,7 +60,7 @@ export const ResetPasswordPage: React.FC = () => {
             label="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
             required
           />
 
@@ -69,7 +69,7 @@ export const ResetPasswordPage: React.FC = () => {
             label="Confirm New Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
             required
           />
 
@@ -86,3 +86,4 @@ export const ResetPasswordPage: React.FC = () => {
     </div>
   );
 };
+

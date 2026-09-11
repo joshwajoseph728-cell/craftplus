@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Conversation, Profile } from '../types/database.types';
 import { messageService } from '../services/messageService';
 import { useAuth } from './AuthContext';
@@ -77,3 +77,4 @@ export const useChat = (): ChatContextType => {
   }
   return context;
 };
+

@@ -164,7 +164,8 @@ export const aiService = {
       reasons: warnings.length > 0 ? warnings : ['Clean content. No spam, toxicity, or deceptive patterns detected.'],
       suggestions: warnings.length > 0
         ? ['Verify all external links', 'Focus feedback on technical architecture and constructive advice']
-        : ['Content complies with CraftPulse Community Safety Standards']
+        : ['Content complies with CraftPlus Community Safety Standards']
     };
   }
 };
+

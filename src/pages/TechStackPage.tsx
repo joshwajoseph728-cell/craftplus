@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Cpu,
@@ -25,7 +25,7 @@ export const TechStackPage: React.FC = () => {
           <span>College Capstone Project Architecture</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold font-display text-slate-900 dark:text-white tracking-tight">
-          CraftPulse System Architecture
+          CraftPlus System Architecture
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
           An in-depth breakdown of the technology stack, database normalization, Row-Level Security, and real-time synchronization.
@@ -41,28 +41,28 @@ export const TechStackPage: React.FC = () => {
 
         {/* ASCII / Visual Flow Diagram */}
         <div className="p-5 rounded-2xl bg-slate-950 text-slate-200 font-mono text-xs overflow-x-auto border border-white/10 leading-relaxed">
-          <div className="text-brand-400 font-bold mb-2">── CLIENT APPLICATION LAYER (React 18 + TypeScript + Vite)</div>
+          <div className="text-brand-400 font-bold mb-2">â”€â”€ CLIENT APPLICATION LAYER (React 18 + TypeScript + Vite)</div>
           <div className="text-slate-300">
-            {"  "}├── UI System: Tailwind CSS + Neo-Glassmorphism Design System + Lucide Icons<br />
-            {"  "}├── State & Contexts: AuthContext, ThemeContext, NotificationContext, ChatContext<br />
-            {"  "}├── Form Validation: React Hook Form + Zod Schema Validation<br />
-            {"  "}└── Performance: Optimistic UI Updates + Canvas Confetti + Lazy Image Loading
+            {"  "}â”œâ”€â”€ UI System: Tailwind CSS + Neo-Glassmorphism Design System + Lucide Icons<br />
+            {"  "}â”œâ”€â”€ State & Contexts: AuthContext, ThemeContext, NotificationContext, ChatContext<br />
+            {"  "}â”œâ”€â”€ Form Validation: React Hook Form + Zod Schema Validation<br />
+            {"  "}â””â”€â”€ Performance: Optimistic UI Updates + Canvas Confetti + Lazy Image Loading
           </div>
 
-          <div className="text-pink-400 font-bold my-2">{"            "}│<br />{"            "}▼ (Supabase JS Client SDK / JWT Bearer Tokens)</div>
+          <div className="text-pink-400 font-bold my-2">{"            "}â”‚<br />{"            "}â–¼ (Supabase JS Client SDK / JWT Bearer Tokens)</div>
 
-          <div className="text-brand-400 font-bold mb-2">── SUPABASE CLOUD INFRASTRUCTURE (Backend-as-a-Service)</div>
+          <div className="text-brand-400 font-bold mb-2">â”€â”€ SUPABASE CLOUD INFRASTRUCTURE (Backend-as-a-Service)</div>
           <div className="text-slate-300">
-            {"  "}├── 🔐 Supabase Auth (JWT Sessions, Sign-up triggers, Profile provisioning)<br />
-            {"  "}├── 🐘 PostgreSQL Database (Normalized 15 relational tables, Foreign Keys, Indexes)<br />
-            {"  "}├── 🛡️ Row Level Security (Granular multi-tenant isolation, Private account gate)<br />
-            {"  "}├── ⚡ Realtime Engine (Postgres CDC replication for DM chat & activity alerts)<br />
-            {"  "}└── 📦 Supabase Storage (Public avatar/post buckets + secured message storage)
+            {"  "}â”œâ”€â”€ ðŸ” Supabase Auth (JWT Sessions, Sign-up triggers, Profile provisioning)<br />
+            {"  "}â”œâ”€â”€ ðŸ˜ PostgreSQL Database (Normalized 15 relational tables, Foreign Keys, Indexes)<br />
+            {"  "}â”œâ”€â”€ ðŸ›¡ï¸ Row Level Security (Granular multi-tenant isolation, Private account gate)<br />
+            {"  "}â”œâ”€â”€ âš¡ Realtime Engine (Postgres CDC replication for DM chat & activity alerts)<br />
+            {"  "}â””â”€â”€ ðŸ“¦ Supabase Storage (Public avatar/post buckets + secured message storage)
           </div>
 
-          <div className="text-emerald-400 font-bold my-2">{"            "}│<br />{"            "}▼</div>
+          <div className="text-emerald-400 font-bold my-2">{"            "}â”‚<br />{"            "}â–¼</div>
 
-          <div className="text-brand-400 font-bold">── PRODUCTION DEPLOYMENT: Vercel Edge Network (Vercel-Ready SPA)</div>
+          <div className="text-brand-400 font-bold">â”€â”€ PRODUCTION DEPLOYMENT: Vercel Edge Network (Vercel-Ready SPA)</div>
         </div>
       </div>
 
@@ -78,10 +78,10 @@ export const TechStackPage: React.FC = () => {
             15 fully normalized tables with primary keys, foreign keys, cascading deletion rules, unique constraints, and B-tree performance indexes on <code className="text-brand-500">username</code>, <code className="text-brand-500">post_id</code>, <code className="text-brand-500">user_id</code>, and timestamps.
           </p>
           <ul className="text-xs text-slate-600 dark:text-slate-300 space-y-1 pt-1">
-            <li>• <code className="font-bold">profiles</code>, <code className="font-bold">posts</code>, <code className="font-bold">post_media</code> (carousel)</li>
-            <li>• <code className="font-bold">comments</code> (nested self-referential tree)</li>
-            <li>• <code className="font-bold">stories</code> (24h expires_at interval)</li>
-            <li>• <code className="font-bold">messages</code>, <code className="font-bold">notifications</code>, <code className="font-bold">reports</code></li>
+            <li>â€¢ <code className="font-bold">profiles</code>, <code className="font-bold">posts</code>, <code className="font-bold">post_media</code> (carousel)</li>
+            <li>â€¢ <code className="font-bold">comments</code> (nested self-referential tree)</li>
+            <li>â€¢ <code className="font-bold">stories</code> (24h expires_at interval)</li>
+            <li>â€¢ <code className="font-bold">messages</code>, <code className="font-bold">notifications</code>, <code className="font-bold">reports</code></li>
           </ul>
         </div>
 
@@ -95,9 +95,9 @@ export const TechStackPage: React.FC = () => {
             Every database transaction is evaluated against cryptographically signed JWT auth tokens. Client queries cannot mutate other users' profiles, posts, comments, or direct messages.
           </p>
           <ul className="text-xs text-slate-600 dark:text-slate-300 space-y-1 pt-1">
-            <li>• Private accounts require accepted follow status</li>
-            <li>• Admins verified via <code className="text-brand-500">public.is_admin()</code> function</li>
-            <li>• Storage bucket policies verify folder-level ownership</li>
+            <li>â€¢ Private accounts require accepted follow status</li>
+            <li>â€¢ Admins verified via <code className="text-brand-500">public.is_admin()</code> function</li>
+            <li>â€¢ Storage bucket policies verify folder-level ownership</li>
           </ul>
         </div>
 
@@ -111,9 +111,9 @@ export const TechStackPage: React.FC = () => {
             Database triggers automatically update <code className="text-brand-500">likes_count</code> and <code className="text-brand-500">comments_count</code>, generate notifications, and broadcast messages over WebSocket subscriptions.
           </p>
           <ul className="text-xs text-slate-600 dark:text-slate-300 space-y-1 pt-1">
-            <li>• Live incoming message delivery</li>
-            <li>• Notification badge counter incrementation</li>
-            <li>• Optimistic UI client state synchronization</li>
+            <li>â€¢ Live incoming message delivery</li>
+            <li>â€¢ Notification badge counter incrementation</li>
+            <li>â€¢ Optimistic UI client state synchronization</li>
           </ul>
         </div>
 
@@ -127,9 +127,9 @@ export const TechStackPage: React.FC = () => {
             Separate storage buckets for <code className="text-brand-500">avatars</code>, <code className="text-brand-500">posts</code>, <code className="text-brand-500">stories</code>, and <code className="text-brand-500">messages</code> with mime-type checking and 5MB payload limits.
           </p>
           <ul className="text-xs text-slate-600 dark:text-slate-300 space-y-1 pt-1">
-            <li>• Image compression & validation</li>
-            <li>• Dual-engine demo resilience mode</li>
-            <li>• Public CDN delivery URLs</li>
+            <li>â€¢ Image compression & validation</li>
+            <li>â€¢ Dual-engine demo resilience mode</li>
+            <li>â€¢ Public CDN delivery URLs</li>
           </ul>
         </div>
       </div>
@@ -150,3 +150,4 @@ export const TechStackPage: React.FC = () => {
     </div>
   );
 };
+

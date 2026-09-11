@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+﻿import React, { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
 export interface TabItem {
@@ -75,3 +75,4 @@ export const Tabs: React.FC<TabsProps> = ({
     </div>
   );
 };
+

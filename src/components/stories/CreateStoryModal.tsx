@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { storageService } from '../../services/storageService';
@@ -65,7 +65,7 @@ export const CreateStoryModal: React.FC<CreateStoryModalProps> = ({
 
       if (error) throw new Error(error);
 
-      showToast('Story Posted', 'Your story will be visible for 24 hours ⏱️', 'success');
+      showToast('Story Posted', 'Your story will be visible for 24 hours â±ï¸', 'success');
       if (onStoryCreated) onStoryCreated();
 
       setFile(null);
@@ -149,3 +149,4 @@ export const CreateStoryModal: React.FC<CreateStoryModalProps> = ({
     </Modal>
   );
 };
+

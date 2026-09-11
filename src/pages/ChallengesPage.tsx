@@ -122,3 +122,4 @@ export const ChallengesPage: React.FC = () => {
     </div>
   );
 };
+

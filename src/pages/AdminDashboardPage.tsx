@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotifications } from '../contexts/NotificationContext';
 import { adminService } from '../services/adminService';
@@ -171,7 +171,7 @@ export const AdminDashboardPage: React.FC = () => {
                       {report.status.toUpperCase()}
                     </Badge>
                     <span className="text-xs font-bold text-slate-900 dark:text-white">Reason: {report.reason}</span>
-                    <span className="text-[11px] text-slate-400">• {formatRelativeTime(report.created_at)}</span>
+                    <span className="text-[11px] text-slate-400">â€¢ {formatRelativeTime(report.created_at)}</span>
                   </div>
 
                   {report.reporter && (
@@ -247,3 +247,4 @@ export const AdminDashboardPage: React.FC = () => {
     </div>
   );
 };
+

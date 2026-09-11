@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+﻿import React, { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
 export interface BadgeProps {
@@ -34,3 +34,4 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+

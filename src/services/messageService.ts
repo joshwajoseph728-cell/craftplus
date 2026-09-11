@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Message, Conversation, Profile } from '../types/database.types';
 import { INITIAL_MESSAGES, INITIAL_PROFILES } from '../lib/mockData';
 
@@ -244,3 +244,4 @@ export const messageService = {
     }
   }
 };
+

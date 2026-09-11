@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Message, Profile } from '../../types/database.types';
 import { messageService } from '../../services/messageService';
 import { storageService } from '../../services/storageService';
@@ -35,7 +35,7 @@ export interface ChatWindowProps {
   onBack?: () => void;
 }
 
-const QUICK_EMOJIS = ['👍', '❤️', '🔥', '🚀', '💡', '😂', '👏', '🎉', '💯', '✨'];
+const QUICK_EMOJIS = ['ðŸ‘', 'â¤ï¸', 'ðŸ”¥', 'ðŸš€', 'ðŸ’¡', 'ðŸ˜‚', 'ðŸ‘', 'ðŸŽ‰', 'ðŸ’¯', 'âœ¨'];
 
 export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => {
   const { user } = useAuth();
@@ -154,7 +154,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
       id: `temp-voice-${Date.now()}`,
       sender_id: user.id,
       receiver_id: recipient.id,
-      content: `🎙️ Voice Note (${formattedDuration})`,
+      content: `ðŸŽ™ï¸ Voice Note (${formattedDuration})`,
       audio_url: 'https://actions.google.com/sounds/v1/science_fiction/teleport_whoosh.ogg',
       is_read: false,
       created_at: new Date().toISOString(),
@@ -166,7 +166,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
       await messageService.sendMessage({
         sender: user,
         receiverId: recipient.id,
-        content: `🎙️ Voice Note (${formattedDuration})`,
+        content: `ðŸŽ™ï¸ Voice Note (${formattedDuration})`,
         audioUrl: 'https://actions.google.com/sounds/v1/science_fiction/teleport_whoosh.ogg'
       });
       await loadMessages();
@@ -213,7 +213,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
     if (!user || (!inputText.trim() && !codeSnippet.trim() && !attachedImage) || isSending) return;
 
     let mediaUrl: string | undefined = undefined;
-    const content = inputText.trim() || (attachedImage ? '📷 Photo Attachment' : codeSnippet ? '💻 Code Snippet' : '');
+    const content = inputText.trim() || (attachedImage ? 'ðŸ“· Photo Attachment' : codeSnippet ? 'ðŸ’» Code Snippet' : '');
     const currentCode = codeSnippet.trim() ? { language: codeLanguage, code: codeSnippet } : undefined;
 
     const currentAttached = attachedImage;
@@ -267,7 +267,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
 
   const handleSendCollabInvitation = () => {
     if (!user) return;
-    const content = `🤝 Project Collaboration Invitation:\n"Hey @${recipient.username}, I'm building an exciting project and would love to collaborate based on your work in ${recipient.skills?.slice(0, 3).join(', ') || 'Software & Engineering'}. Let's team up!"`;
+    const content = `ðŸ¤ Project Collaboration Invitation:\n"Hey @${recipient.username}, I'm building an exciting project and would love to collaborate based on your work in ${recipient.skills?.slice(0, 3).join(', ') || 'Software & Engineering'}. Let's team up!"`;
     setInputText(content);
   };
 
@@ -325,7 +325,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
               </p>
               <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold truncate flex items-center gap-1">
                 <span>@{recipient.username}</span>
-                <span>• Online</span>
+                <span>â€¢ Online</span>
               </p>
             </div>
           </Link>
@@ -414,16 +414,16 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
             )}
             <div className="pt-2 flex items-center gap-2">
               <button
-                onClick={() => setInputText(`Hey @${recipient.username}! 👋 Loved your projects on CraftPulse.`)}
+                onClick={() => setInputText(`Hey @${recipient.username}! ðŸ‘‹ Loved your projects on CraftPlus.`)}
                 className="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20 hover:bg-brand-500/20 transition-colors"
               >
-                Say Hello 👋
+                Say Hello ðŸ‘‹
               </button>
               <button
                 onClick={handleSendCollabInvitation}
                 className="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
               >
-                Invite to Collab 🤝
+                Invite to Collab ðŸ¤
               </button>
             </div>
           </div>
@@ -540,7 +540,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
                   'opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 mt-1 px-1',
                   isMe ? 'justify-end' : 'justify-start'
                 )}>
-                  {['❤️', '🔥', '🚀', '👍'].map(emoji => (
+                  {['â¤ï¸', 'ðŸ”¥', 'ðŸš€', 'ðŸ‘'].map(emoji => (
                     <button
                       key={emoji}
                       type="button"
@@ -615,7 +615,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
                 {attachedImage.file.name}
               </p>
               <p className="text-[10px] text-slate-400">
-                {(attachedImage.file.size / (1024 * 1024)).toFixed(2)} MB • Ready to send
+                {(attachedImage.file.size / (1024 * 1024)).toFixed(2)} MB â€¢ Ready to send
               </p>
             </div>
           </div>
@@ -678,58 +678,60 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
       {/* Bottom Message Input Bar */}
       <form
         onSubmit={handleSendMessage}
-        className="p-3 md:p-4 bg-white dark:bg-surface-cardDark border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-2 z-20"
+        className="p-2 md:p-4 bg-white dark:bg-surface-cardDark border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-1.5 md:gap-2 z-20"
       >
-        {/* Photo Attachment Button */}
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isUploading}
-          className="p-2.5 rounded-2xl text-slate-500 hover:text-brand-500 hover:bg-brand-500/10 transition-colors shrink-0"
-          title="Attach Image / Screenshot"
-        >
-          <ImageIcon className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-0.5 md:gap-1 shrink-0">
+          {/* Photo Attachment Button */}
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="p-1.5 md:p-2.5 rounded-xl md:rounded-2xl text-slate-500 hover:text-brand-500 hover:bg-brand-500/10 transition-colors"
+            title="Attach Image / Screenshot"
+          >
+            <ImageIcon className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
 
-        {/* Code Snippet Button */}
-        <button
-          type="button"
-          onClick={() => setShowCodeInput(!showCodeInput)}
-          className={cn(
-            'p-2.5 rounded-2xl transition-colors shrink-0',
-            showCodeInput
-              ? 'bg-brand-500/20 text-brand-500'
-              : 'text-slate-500 hover:text-brand-500 hover:bg-brand-500/10'
-          )}
-          title="Attach Code Snippet"
-        >
-          <Code2 className="w-5 h-5" />
-        </button>
+          {/* Code Snippet Button */}
+          <button
+            type="button"
+            onClick={() => setShowCodeInput(!showCodeInput)}
+            className={cn(
+              'p-1.5 md:p-2.5 rounded-xl md:rounded-2xl transition-colors',
+              showCodeInput
+                ? 'bg-brand-500/20 text-brand-500'
+                : 'text-slate-500 hover:text-brand-500 hover:bg-brand-500/10'
+            )}
+            title="Attach Code Snippet"
+          >
+            <Code2 className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
 
-        {/* Voice Note Button */}
-        <button
-          type="button"
-          onClick={isRecordingVoice ? handleStopVoiceRecording : handleStartVoiceRecording}
-          className={cn(
-            'p-2.5 rounded-2xl transition-colors shrink-0',
-            isRecordingVoice
-              ? 'bg-rose-500 text-white animate-pulse'
-              : 'text-slate-500 hover:text-rose-500 hover:bg-rose-500/10'
-          )}
-          title="Record Voice Memo"
-        >
-          <Mic className="w-5 h-5" />
-        </button>
+          {/* Voice Note Button */}
+          <button
+            type="button"
+            onClick={isRecordingVoice ? handleStopVoiceRecording : handleStartVoiceRecording}
+            className={cn(
+              'p-1.5 md:p-2.5 rounded-xl md:rounded-2xl transition-colors',
+              isRecordingVoice
+                ? 'bg-rose-500 text-white animate-pulse'
+                : 'text-slate-500 hover:text-rose-500 hover:bg-rose-500/10'
+            )}
+            title="Record Voice Memo"
+          >
+            <Mic className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
 
-        {/* Emoji Button */}
-        <button
-          type="button"
-          onClick={() => setShowEmojiTray(!showEmojiTray)}
-          className="p-2.5 rounded-2xl text-slate-500 hover:text-amber-500 hover:bg-amber-500/10 transition-colors shrink-0"
-          title="Insert Emoji"
-        >
-          <Smile className="w-5 h-5" />
-        </button>
+          {/* Emoji Button */}
+          <button
+            type="button"
+            onClick={() => setShowEmojiTray(!showEmojiTray)}
+            className="hidden sm:inline-flex p-1.5 md:p-2.5 rounded-xl md:rounded-2xl text-slate-500 hover:text-amber-500 hover:bg-amber-500/10 transition-colors"
+            title="Insert Emoji"
+          >
+            <Smile className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+        </div>
 
         {/* Hidden File Picker */}
         <input
@@ -745,8 +747,8 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder={`Message ${recipient.username} (Press Enter to send, paste pictures with Ctrl+V)...`}
-          className="flex-1 px-4 py-2.5 text-xs md:text-sm rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-transparent focus:border-brand-500 outline-none transition-colors"
+          placeholder={`Message ${recipient.username}...`}
+          className="flex-1 min-w-0 px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm rounded-xl md:rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-transparent focus:border-brand-500 outline-none transition-colors"
         />
 
         {/* Send Button */}
@@ -756,9 +758,9 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
           size="sm"
           disabled={(!inputText.trim() && !codeSnippet.trim() && !attachedImage) || isSending}
           isLoading={isSending || isUploading}
-          className="h-10 px-4 rounded-2xl shrink-0"
+          className="h-9 md:h-10 px-3 md:px-4 rounded-xl md:rounded-2xl shrink-0"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
         </Button>
       </form>
 
@@ -779,7 +781,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
                 href={lightboxImage}
                 target="_blank"
                 rel="noreferrer"
-                download="craftpulse-attachment.jpg"
+                download="CraftPlus-attachment.jpg"
                 className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/20 text-white font-semibold text-xs hover:bg-white/30 transition-colors"
               >
                 <Download className="w-4 h-4" />
@@ -798,3 +800,4 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
     </div>
   );
 };
+

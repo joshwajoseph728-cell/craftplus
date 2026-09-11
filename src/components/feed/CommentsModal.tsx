@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Post, Comment } from '../../types/database.types';
 import { commentService } from '../../services/commentService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -236,3 +236,4 @@ export const CommentsModal: React.FC<CommentsModalProps> = ({
     </Modal>
   );
 };
+
