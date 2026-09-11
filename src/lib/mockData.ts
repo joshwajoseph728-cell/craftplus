@@ -262,7 +262,8 @@ export const INITIAL_POSTS: Post[] = [
     is_saved: true,
     hashtags: ['designsystem', 'uiux', 'opensource', 'react', 'webdevelopment'],
     recommendation_reason: 'Trending in Design & Matches your React skills',
-    is_verified_link: true
+    is_verified_link: true,
+    mood_type: 'work'
   },
   {
     id: 'post-2',
@@ -306,7 +307,8 @@ export const INITIAL_POSTS: Post[] = [
     hashtags: ['webgpu', 'creativecoding', 'shaders', 'rust', '3dgraphics'],
     challenge_badge: '🏆 AI/3D Challenge Winner',
     recommendation_reason: 'High engagement in Creative 3D Art',
-    is_verified_link: true
+    is_verified_link: true,
+    mood_type: 'work'
   },
   {
     id: 'post-3',
@@ -340,7 +342,8 @@ export const INITIAL_POSTS: Post[] = [
     is_saved: false,
     hashtags: ['machinelearning', 'computervision', 'ai', 'edgecomputing', 'python'],
     recommendation_reason: 'Featured in AI & Machine Learning Research',
-    is_verified_link: true
+    is_verified_link: true,
+    mood_type: 'work'
   },
   {
     id: 'post-5',
@@ -376,7 +379,72 @@ export const INITIAL_POSTS: Post[] = [
     hashtags: ['robotics', 'ros2', 'embedded', 'hardware', 'makers', 'iot'],
     challenge_badge: '🏆 Hardware Hack Gold Medal',
     recommendation_reason: 'Top Maker project of the week',
-    is_verified_link: true
+    is_verified_link: true,
+    mood_type: 'work'
+  },
+  {
+    id: 'post-fun-1',
+    user_id: 'user-002',
+    project_title: 'Cyberpunk Workspace & Ambient Neon Station Tour ✨',
+    category: 'Creative & 3D Art',
+    work_status: 'Concept',
+    open_to_collab: false,
+    caption: 'Late night creative coding vibes! Setup tour of my dual 4K OLED + audio visualizer station. What is your go-to soundtrack for creative flow? 🎧⚡',
+    tech_stack: ['Mechanical Keyboards', 'OLED', 'Nanoleaf', 'Ambient Sound'],
+    location: 'Singapore Night Studio',
+    audience: 'public',
+    likes_count: 2490,
+    comments_count: 94,
+    created_at: new Date(Date.now() - 3 * 3600000).toISOString(),
+    user: INITIAL_PROFILES[1],
+    media: [
+      {
+        id: 'media-fun-1',
+        post_id: 'post-fun-1',
+        media_url: 'https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=1200&auto=format&fit=crop&q=80',
+        media_type: 'image',
+        display_order: 0,
+        alt_text: 'Aesthetic neon developer studio setup with mechanical keyboard'
+      }
+    ],
+    is_liked: true,
+    is_saved: false,
+    hashtags: ['desksetup', 'aesthetic', 'creatorlife', 'workvibes', 'cyberpunk'],
+    recommendation_reason: 'Trending in Creator Lifestyle & Desk Inspo',
+    is_verified_link: true,
+    mood_type: 'normal'
+  },
+  {
+    id: 'post-fun-2',
+    user_id: 'user-004',
+    project_title: 'Ambient Modular Synth Session & Lo-Fi Jams ☕🎛️',
+    category: 'Music & Sound Design',
+    work_status: 'Completed',
+    open_to_collab: true,
+    caption: 'Grab a coffee and relax with some chill generative modular chords made with custom WebAudio patches. Pure flow state moments.',
+    tech_stack: ['Ableton Live', 'Moog', 'Eurorack', 'WebAudio'],
+    location: 'Kyoto Sound Studio',
+    audience: 'public',
+    likes_count: 1820,
+    comments_count: 67,
+    created_at: new Date(Date.now() - 8 * 3600000).toISOString(),
+    user: INITIAL_PROFILES[3],
+    media: [
+      {
+        id: 'media-fun-2',
+        post_id: 'post-fun-2',
+        media_url: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&auto=format&fit=crop&q=80',
+        media_type: 'image',
+        display_order: 0,
+        alt_text: 'Modular synthesizer and audio studio workspace'
+      }
+    ],
+    is_liked: false,
+    is_saved: true,
+    hashtags: ['lofi', 'synth', 'musicproduction', 'flowstate', 'creativity'],
+    recommendation_reason: 'Relaxing creator audio sessions',
+    is_verified_link: true,
+    mood_type: 'normal'
   },
   {
     id: 'post-4',
@@ -419,7 +487,8 @@ export const INITIAL_POSTS: Post[] = [
     is_saved: true,
     hashtags: ['fullstack', 'react', 'supabase', 'softwareengineering', 'typescript', 'portfolio'],
     recommendation_reason: 'Official platform showcase',
-    is_verified_link: true
+    is_verified_link: true,
+    mood_type: 'both'
   }
 ];
 

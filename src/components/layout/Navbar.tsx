@@ -5,6 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { useChat } from '../../contexts/ChatContext';
 import { Avatar } from '../ui/Avatar';
+import { MoodSwitcher } from './MoodSwitcher';
 import { Sun, Moon, Bell, MessageSquare, PlusSquare, Sparkles, ShieldAlert, Cpu, Activity } from 'lucide-react';
 
 export interface NavbarProps {
@@ -32,12 +33,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCreate }) => {
           </span>
         </Link>
 
+        {/* Center: Mood Switcher */}
+        <div className="hidden sm:block">
+          <MoodSwitcher compact={true} />
+        </div>
+
         {/* Action Controls */}
         <div className="flex items-center gap-2 md:gap-3">
           {/* Tech Architecture Link */}
           <Link
             to="/tech-stack"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20 hover:bg-brand-500/20 transition-colors"
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20 hover:bg-brand-500/20 transition-colors"
             title="System Architecture & Database Design"
           >
             <Cpu className="w-4 h-4" />

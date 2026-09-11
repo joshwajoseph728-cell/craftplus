@@ -1,10 +1,11 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { useChat } from '../../contexts/ChatContext';
 import { Avatar } from '../ui/Avatar';
 import { AICreatorModal } from '../ai/AICreatorModal';
+import { MoodSwitcher } from './MoodSwitcher';
 import {
   Home,
   Compass,
@@ -70,6 +71,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
               </p>
             </div>
           </Link>
+
+          {/* Mood Switcher Toggle */}
+          <div className="px-2">
+            <MoodSwitcher />
+          </div>
 
           {/* Action Buttons: Showcase Project + AI Studio */}
           <div className="px-2 space-y-2">

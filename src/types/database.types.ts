@@ -106,6 +106,7 @@ export interface Post {
   challenge_badge?: string;
   recommendation_reason?: string; // e.g. "Matched with your skills in React and UI/UX"
   is_verified_link?: boolean;
+  mood_type?: 'work' | 'normal' | 'both';
 }
 
 export interface Comment {

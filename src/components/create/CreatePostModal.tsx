@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { storageService } from '../../services/storageService';
@@ -85,6 +85,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
   const [collabRoleNeeded, setCollabRoleNeeded] = useState('');
   const [location, setLocation] = useState('');
   const [audience, setAudience] = useState<'public' | 'followers' | 'private'>('public');
+  const [moodType, setMoodType] = useState<'work' | 'normal'>('work');
 
   // Contributors State
   const [contributors, setContributors] = useState<Contributor[]>([]);
@@ -216,7 +217,8 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
         location: location.trim() || undefined,
         audience,
         mediaUrls: finalMedia,
-        hashtags
+        hashtags,
+        mood_type: moodType
       });
 
       if (error || !post) {
@@ -375,6 +377,44 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
             multiple
             className="hidden"
           />
+
+          {/* Mood Selection (Work vs Normal) */}
+          <div className="p-2.5 rounded-2xl bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                Target Mood Stream
+              </label>
+              <span className="text-[11px] text-slate-400">
+                {moodType === 'work' ? 'Technical Builds & Showcases' : 'Creative Reels, BTS & Fun Clips'}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setMoodType('work')}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 border ${
+                  moodType === 'work'
+                    ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white border-transparent shadow-sm'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+                }`}
+              >
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Work Mood (Portfolio)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMoodType('normal')}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 border ${
+                  moodType === 'normal'
+                    ? 'bg-gradient-to-r from-pink-600 to-amber-500 text-white border-transparent shadow-sm'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Normal Mood (Reel / BTS)</span>
+              </button>
+            </div>
+          </div>
 
           {/* Project Name & Category */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

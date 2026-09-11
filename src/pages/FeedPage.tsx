@@ -1,9 +1,12 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePosts } from '../hooks/usePosts';
 import { useAuth } from '../contexts/AuthContext';
+import { useMood } from '../contexts/MoodContext';
 import { postService } from '../services/postService';
 import { Post, ProjectCategory } from '../types/database.types';
 import { StoriesBar } from '../components/stories/StoriesBar';
+import { CreatorReelsBar } from '../components/feed/CreatorReelsBar';
+import { MoodSwitcher } from '../components/layout/MoodSwitcher';
 import { PostCard } from '../components/feed/PostCard';
 import { PostSkeleton } from '../components/ui/Skeleton';
 import { Button } from '../components/ui/Button';
@@ -22,7 +25,10 @@ import {
   Users,
   Flame,
   Clock,
-  Radio
+  Radio,
+  Briefcase,
+  Film,
+  Coffee
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -38,6 +44,7 @@ const CATEGORIES = [
 
 export const FeedPage: React.FC = () => {
   const { user } = useAuth();
+  const { mood, setMood } = useMood();
   const { toggleLike, toggleSave, deletePost } = usePosts();
 
   const [feedMode, setFeedMode] = useState<'recommended' | 'following' | 'latest'>('recommended');
@@ -45,10 +52,10 @@ export const FeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const loadFeed = async (cat: string, mode: string) => {
+  const loadFeed = async (cat: string, mode: string, currentMood: 'work' | 'normal') => {
     setLoading(true);
     try {
-      const data = await postService.getFeedPosts(user?.id, cat);
+      const data = await postService.getFeedPosts(user?.id, cat, currentMood);
       let filtered = [...data];
 
       if (mode === 'following') {
@@ -66,11 +73,70 @@ export const FeedPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadFeed(selectedCategory, feedMode);
-  }, [selectedCategory, feedMode, user?.id]);
+    loadFeed(selectedCategory, feedMode, mood);
+  }, [selectedCategory, feedMode, mood, user?.id]);
 
   return (
     <div className="max-w-xl mx-auto space-y-4 pb-12">
+      {/* Mobile Mood Switcher */}
+      <div className="sm:hidden">
+        <MoodSwitcher />
+      </div>
+
+      {/* Mood Header Banner */}
+      {mood === 'work' ? (
+        <div className="p-3.5 rounded-2xl bg-gradient-to-r from-brand-600/10 via-indigo-600/10 to-accent-500/10 border border-brand-500/20 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center">
+              <Briefcase className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <span>Work Mood Active</span>
+                <span className="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-brand-500 text-white">PRO</span>
+              </p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                Viewing technical builds, case studies, repositories & architecture patterns.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setMood('normal')}
+            className="text-[11px] font-bold text-brand-600 dark:text-brand-400 hover:underline shrink-0"
+          >
+            Switch to Normal &rarr;
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/10 via-amber-500/10 to-rose-500/10 border border-pink-500/20 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-pink-500/20 text-pink-600 dark:text-pink-400 flex items-center justify-center">
+                <Film className="w-4 h-4" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <span>Normal Mood Active</span>
+                  <span className="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-pink-500 text-white">REELS & CHILL</span>
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Enjoying creator shorts, studio desk setups, BTS jams and creative clips.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setMood('work')}
+              className="text-[11px] font-bold text-pink-600 dark:text-pink-400 hover:underline shrink-0"
+            >
+              Switch to Work &rarr;
+            </button>
+          </div>
+
+          {/* Normal Mood: Creator Reels Bar */}
+          <CreatorReelsBar />
+        </div>
+      )}
+
       {/* 24-Hour Stories Carousel */}
       <StoriesBar />
 
@@ -153,13 +219,13 @@ export const FeedPage: React.FC = () => {
               : feedMode === 'latest'
               ? 'Freshly Published Builds'
               : selectedCategory === 'All'
-              ? 'Curated Creator Showcases'
+              ? mood === 'work' ? 'Curated Engineering & Design Showcases' : 'Curated Creative Reels & Studio Highlights'
               : `${selectedCategory} Projects`}
           </span>
         </h1>
 
         <button
-          onClick={() => loadFeed(selectedCategory, feedMode)}
+          onClick={() => loadFeed(selectedCategory, feedMode, mood)}
           className="text-xs text-slate-500 hover:text-brand-500 flex items-center gap-1 font-semibold transition-colors p-1 rounded-lg"
           title="Refresh Feed"
         >
@@ -211,7 +277,7 @@ export const FeedPage: React.FC = () => {
                 deletePost(id);
                 setPosts(prev => prev.filter(p => p.id !== id));
               }}
-              onPostUpdated={() => loadFeed(selectedCategory, feedMode)}
+              onPostUpdated={() => loadFeed(selectedCategory, feedMode, mood)}
             />
           ))}
 

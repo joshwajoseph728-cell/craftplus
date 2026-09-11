@@ -23,7 +23,7 @@ const setStoredPosts = (posts: Post[]) => {
 };
 
 export const postService = {
-  async getFeedPosts(currentUserId?: string, category?: string): Promise<Post[]> {
+  async getFeedPosts(currentUserId?: string, category?: string, mood?: 'work' | 'normal'): Promise<Post[]> {
     let posts: Post[] = [];
 
     if (!isSupabaseConfigured()) {
@@ -66,9 +66,16 @@ export const postService = {
       }
     }
 
+    if (mood === 'work') {
+      posts = posts.filter(p => p.mood_type === 'work' || p.mood_type === 'both' || !p.mood_type);
+    } else if (mood === 'normal') {
+      posts = posts.filter(p => p.mood_type === 'normal' || p.mood_type === 'both');
+    }
+
     if (category && category !== 'All') {
       return posts.filter(p => p.category === category);
     }
+
     return posts;
   },
 
@@ -131,6 +138,7 @@ export const postService = {
     audience: 'public' | 'followers' | 'private';
     mediaUrls: string[];
     hashtags?: string[];
+    mood_type?: 'work' | 'normal' | 'both';
   }): Promise<{ post: Post | null; error: string | null }> {
     if (!isSupabaseConfigured()) {
       const newPostId = `post-${Date.now()}`;
@@ -148,6 +156,7 @@ export const postService = {
         open_to_collab: params.open_to_collab ?? true,
         location: params.location,
         audience: params.audience,
+        mood_type: params.mood_type || 'work',
         likes_count: 0,
         comments_count: 0,
         created_at: new Date().toISOString(),
