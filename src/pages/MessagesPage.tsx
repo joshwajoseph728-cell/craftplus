@@ -18,7 +18,7 @@ export const MessagesPage: React.FC = () => {
   };
 
   return (
-    <div className={`${activeUser ? 'h-[100dvh]' : 'h-[calc(100dvh-4.25rem)]'} md:h-[calc(100vh-5.5rem)] w-full rounded-none md:rounded-3xl overflow-hidden border-0 md:border md:border-slate-200/80 md:dark:border-slate-800/80 bg-white dark:bg-surface-cardDark flex shadow-none md:shadow-sm`}>
+    <div className="h-[calc(100dvh-4.25rem)] md:h-[calc(100vh-5.5rem)] w-full rounded-none md:rounded-3xl overflow-hidden border-0 md:border md:border-slate-200/80 md:dark:border-slate-800/80 bg-white dark:bg-surface-cardDark flex shadow-none md:shadow-sm">
       {/* Left Chat List (hidden on mobile if activeUser is open) */}
       <div className={`${activeUser ? 'hidden md:flex' : 'flex'} w-full md:w-80 lg:w-96 h-full shrink-0`}>
         <ChatList
@@ -30,7 +30,7 @@ export const MessagesPage: React.FC = () => {
       </div>
 
       {/* Right Chat Window or Empty State */}
-      <div className={`${!activeUser ? 'hidden md:flex' : 'flex'} flex-1 h-full`}>
+      <div className={activeUser ? "fixed inset-0 z-50 bg-white dark:bg-surface-dark flex flex-col md:relative md:inset-auto md:z-auto md:flex-1 md:h-full" : "hidden md:flex flex-1 h-full"}>
         {activeUser ? (
           <ChatWindow
             recipient={activeUser}

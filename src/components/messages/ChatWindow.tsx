@@ -293,7 +293,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className="relative flex-1 flex flex-col h-full bg-slate-50/50 dark:bg-surface-dark transition-colors overflow-hidden"
+      className="relative flex-1 flex flex-col h-[100dvh] md:h-full w-full bg-slate-50/50 dark:bg-surface-dark transition-colors overflow-hidden"
     >
       {/* Drag & Drop Overlay */}
       {isDraggingOver && (
@@ -680,7 +680,8 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ recipient, onBack }) => 
       {/* Bottom Message Input Bar */}
       <form
         onSubmit={handleSendMessage}
-        className="p-2 sm:p-3 pb-3 sm:pb-4 bg-white/95 dark:bg-surface-cardDark/95 backdrop-blur-md border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-1 sm:gap-2 z-20 shrink-0 w-full max-w-full overflow-hidden"
+        style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0.75rem))' }}
+        className="p-2 sm:p-3 bg-white/95 dark:bg-surface-cardDark/95 backdrop-blur-md border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-1.5 sm:gap-2 z-20 shrink-0 w-full max-w-full box-border"
       >
         <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
           {/* Photo Attachment Button */}
