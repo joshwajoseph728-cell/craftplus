@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -13,6 +13,8 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { FeedPage } from './pages/FeedPage';
 import { ExplorePage } from './pages/ExplorePage';
+import { ChallengesPage } from './pages/ChallengesPage';
+import { CollaborationPage } from './pages/CollaborationPage';
 import { MessagesPage } from './pages/MessagesPage';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { ProfilePage } from './pages/ProfilePage';
@@ -70,6 +72,24 @@ export const App: React.FC = () => {
                   element={
                     <AppLayout>
                       <ExplorePage />
+                    </AppLayout>
+                  }
+                />
+
+                <Route
+                  path="/challenges"
+                  element={
+                    <AppLayout>
+                      <ChallengesPage />
+                    </AppLayout>
+                  }
+                />
+
+                <Route
+                  path="/collaborate"
+                  element={
+                    <AppLayout>
+                      <CollaborationPage />
                     </AppLayout>
                   }
                 />

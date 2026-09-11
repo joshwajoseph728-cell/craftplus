@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Post } from '../../types/database.types';
 import { useAuth } from '../../contexts/AuthContext';
@@ -9,6 +9,8 @@ import { Dropdown, DropdownItem } from '../ui/Dropdown';
 import { CommentsModal } from './CommentsModal';
 import { ShareModal } from './ShareModal';
 import { ReportModal } from './ReportModal';
+import { CollabRequestModal } from '../collaboration/CollabRequestModal';
+import { Modal } from '../ui/Modal';
 import { formatRelativeTime, formatCompactNumber } from '../../lib/utils';
 import {
   Heart,
@@ -32,7 +34,11 @@ import {
   MessageSquare,
   Sparkles,
   Layers,
-  Send
+  Send,
+  HelpCircle,
+  AlertTriangle,
+  Award,
+  Users
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -60,6 +66,8 @@ export const PostCard: React.FC<PostCardProps> = ({
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isCollabModalOpen, setIsCollabModalOpen] = useState(false);
+  const [showWhyModal, setShowWhyModal] = useState(false);
   const [showExperience, setShowExperience] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -94,16 +102,13 @@ export const PostCard: React.FC<PostCardProps> = ({
     lastTapRef.current = now;
   };
 
-  const handleCollabMessage = () => {
-    if (!user) {
-      navigate('/auth/login');
-      return;
-    }
-    setActiveUser(post.user);
-    navigate('/messages');
-  };
-
   const moreItems: DropdownItem[] = [
+    {
+      id: 'why',
+      label: 'Why am I seeing this?',
+      icon: <HelpCircle className="w-4 h-4" />,
+      onClick: () => setShowWhyModal(true)
+    },
     {
       id: 'share',
       label: 'Share Project',
@@ -190,6 +195,13 @@ export const PostCard: React.FC<PostCardProps> = ({
           </div>
 
           <div className="flex items-center gap-1.5">
+            {post.challenge_badge && (
+              <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                <Award className="w-3 h-3 text-amber-500" />
+                <span>{post.challenge_badge}</span>
+              </span>
+            )}
+
             {post.category && (
               <Badge variant="brand" size="sm" className="hidden sm:inline-flex">
                 {post.category}
@@ -207,7 +219,7 @@ export const PostCard: React.FC<PostCardProps> = ({
           </div>
         </div>
 
-        {/* Project Title Banner (if set) */}
+        {/* Project Title Banner */}
         {post.project_title && (
           <div className="px-4 py-2.5 bg-gradient-to-r from-brand-500/10 via-purple-500/5 to-transparent border-y border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
@@ -217,7 +229,7 @@ export const PostCard: React.FC<PostCardProps> = ({
               </h3>
             </div>
             {post.work_status && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shrink-0">
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shrink-0">
                 {post.work_status}
               </span>
             )}
@@ -239,7 +251,7 @@ export const PostCard: React.FC<PostCardProps> = ({
             ) : (
               <img
                 src={currentMedia?.media_url}
-                alt={post.project_title || 'Work media'}
+                alt={currentMedia?.alt_text || post.project_title || 'Work media'}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -318,7 +330,7 @@ export const PostCard: React.FC<PostCardProps> = ({
               </div>
             )}
 
-            {/* Clickable Links (Live Demo & GitHub) */}
+            {/* Clickable Links & Collab Button */}
             <div className="flex flex-wrap items-center gap-2 pt-0.5">
               {post.live_demo_url && (
                 <a
@@ -347,10 +359,10 @@ export const PostCard: React.FC<PostCardProps> = ({
               {!isOwner && post.open_to_collab && (
                 <button
                   type="button"
-                  onClick={handleCollabMessage}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border border-brand-500/40 text-brand-600 dark:text-brand-400 hover:bg-brand-500/10 transition-colors ml-auto"
+                  onClick={() => setIsCollabModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl bg-brand-500/15 border border-brand-500/30 text-brand-600 dark:text-brand-400 hover:bg-brand-500/25 transition-colors ml-auto"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 text-brand-500" />
+                  <Users className="w-3.5 h-3.5 text-brand-500" />
                   <span>Collaborate</span>
                 </button>
               )}
@@ -390,7 +402,14 @@ export const PostCard: React.FC<PostCardProps> = ({
               {/* Direct Message / Send to Creator */}
               <button
                 type="button"
-                onClick={handleCollabMessage}
+                onClick={() => {
+                  if (!user) {
+                    navigate('/auth/login');
+                    return;
+                  }
+                  setActiveUser(post.user);
+                  navigate('/messages');
+                }}
                 className="p-1 text-slate-600 dark:text-slate-300 hover:text-brand-500 transition-colors"
                 title="Send Direct Message (DM)"
               >
@@ -429,6 +448,25 @@ export const PostCard: React.FC<PostCardProps> = ({
                 {post.user.username}
               </Link>
               <span>{post.caption}</span>
+            </div>
+          )}
+
+          {/* Contributors Bar if set */}
+          {post.contributors && post.contributors.length > 0 && (
+            <div className="flex items-center gap-2 pt-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Co-Builders:</span>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {post.contributors.map(c => (
+                  <Link
+                    key={c.id}
+                    to={`/profile/${c.username}`}
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 transition-colors"
+                  >
+                    <Avatar src={c.avatar_url} alt={c.full_name} size="xs" />
+                    <span>{c.full_name}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
 
@@ -488,6 +526,35 @@ export const PostCard: React.FC<PostCardProps> = ({
         isOpen={isReportOpen}
         onClose={() => setIsReportOpen(false)}
       />
+
+      {/* Collaboration Proposal Modal */}
+      <CollabRequestModal
+        isOpen={isCollabModalOpen}
+        onClose={() => setIsCollabModalOpen(false)}
+        targetUser={post.user}
+        project={post}
+      />
+
+      {/* Why Am I Seeing This Modal */}
+      {showWhyModal && (
+        <Modal
+          isOpen={showWhyModal}
+          onClose={() => setShowWhyModal(false)}
+          title="Why am I seeing this?"
+          description="CraftPlus Feed Transparency & Skill Match"
+          maxWidth="sm"
+        >
+          <div className="space-y-3 py-2 text-xs text-slate-700 dark:text-slate-300">
+            <div className="p-3 rounded-2xl bg-brand-500/10 border border-brand-500/20 space-y-1">
+              <p className="font-bold text-brand-600 dark:text-brand-400">Recommendation Signal:</p>
+              <p>{post.recommendation_reason || 'Trending in creator categories matching your followed topics and skills.'}</p>
+            </div>
+            <p className="text-slate-400 text-[11px] leading-relaxed">
+              CraftPlus prioritizes high-quality engineering case studies, open-source repositories, and interactive design prototypes from active creators in your community.
+            </p>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };

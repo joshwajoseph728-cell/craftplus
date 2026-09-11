@@ -7,8 +7,29 @@ export type ProjectCategory =
   | 'Mobile Applications'
   | 'Creative & 3D Art'
   | 'Hardware & IoT'
+  | 'Robotics & Embedded'
+  | 'Photography & Visuals'
+  | 'Music & Sound Design'
   | 'Research & Case Studies'
   | 'Other';
+
+export interface Badge {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  category: 'achievement' | 'challenge' | 'community' | 'expertise';
+  unlocked_at?: string;
+  tier?: 'bronze' | 'silver' | 'gold' | 'diamond';
+}
+
+export interface Contributor {
+  id: string;
+  username: string;
+  full_name: string;
+  avatar_url: string;
+  role_in_project: string; // e.g. "Frontend Architect", "UI/UX Designer", "3D Modeler"
+}
 
 export interface Profile {
   id: string;
@@ -16,9 +37,12 @@ export interface Profile {
   full_name: string;
   avatar_url: string;
   bio?: string;
+  headline?: string;
   website?: string;
   github_url?: string;
   linkedin_url?: string;
+  dribbble_url?: string;
+  youtube_url?: string;
   location?: string;
   skills?: string[];
   date_of_birth?: string;
@@ -34,6 +58,9 @@ export interface Profile {
   projects_count?: number;
   is_following?: boolean;
   follow_status?: 'none' | 'active' | 'pending';
+  badges?: Badge[];
+  portfolio_theme?: 'modern' | 'minimal' | 'cyber';
+  featured_project_ids?: string[];
 }
 
 export interface PostMedia {
@@ -43,6 +70,7 @@ export interface PostMedia {
   media_type: 'image' | 'video';
   display_order: number;
   caption_note?: string;
+  alt_text?: string;
   width?: number;
   height?: number;
 }
@@ -55,11 +83,14 @@ export interface Post {
   caption: string;
   experience_learnings?: string;
   tech_stack?: string[];
+  tools_used?: string[];
+  contributors?: Contributor[];
   live_demo_url?: string;
   github_url?: string;
   location?: string;
   work_status?: 'Completed' | 'In Progress' | 'Case Study' | 'Concept';
   open_to_collab?: boolean;
+  collab_role_needed?: string;
   audience: 'public' | 'followers' | 'private';
   likes_count: number;
   comments_count: number;
@@ -71,6 +102,10 @@ export interface Post {
   is_liked?: boolean;
   is_saved?: boolean;
   hashtags?: string[];
+  challenge_id?: string;
+  challenge_badge?: string;
+  recommendation_reason?: string; // e.g. "Matched with your skills in React and UI/UX"
+  is_verified_link?: boolean;
 }
 
 export interface Comment {
@@ -85,6 +120,7 @@ export interface Comment {
   user: Profile;
   is_liked?: boolean;
   replies?: Comment[];
+  is_flagged_toxic?: boolean;
 }
 
 export interface Story {
@@ -111,9 +147,10 @@ export interface Notification {
   id: string;
   recipient_id: string;
   actor_id: string;
-  type: 'like' | 'comment' | 'reply' | 'follow' | 'follow_request' | 'follow_accepted' | 'mention' | 'collab_request';
+  type: 'like' | 'comment' | 'reply' | 'follow' | 'follow_request' | 'follow_accepted' | 'mention' | 'collab_request' | 'challenge_won';
   post_id?: string;
   comment_id?: string;
+  challenge_id?: string;
   is_read: boolean;
   created_at: string;
   actor: Profile;
@@ -135,6 +172,11 @@ export interface Message {
     id: string;
     title: string;
     thumbnail: string;
+  };
+  collab_proposal?: {
+    role: string;
+    message: string;
+    project_title: string;
   };
   reaction?: string;
   tempStatus?: 'sending' | 'sent' | 'error';
@@ -158,13 +200,43 @@ export interface Hashtag {
   category?: ProjectCategory;
 }
 
+export interface Challenge {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  category: ProjectCategory;
+  banner_url: string;
+  reward_badge: Badge;
+  days_left: number;
+  participants_count: number;
+  submissions_count: number;
+  criteria: string[];
+  status: 'active' | 'judging' | 'ended';
+  featured_submissions?: Post[];
+}
+
+export interface CollabOpportunity {
+  id: string;
+  creator: Profile;
+  project_title: string;
+  category: ProjectCategory;
+  role_needed: string;
+  skills_required: string[];
+  description: string;
+  status: 'open' | 'filled';
+  applicants_count: number;
+  created_at: string;
+  project_id?: string;
+}
+
 export interface Report {
   id: string;
   reporter_id: string;
   post_id?: string;
   comment_id?: string;
   reported_user_id?: string;
-  reason: 'spam' | 'harassment' | 'hate' | 'violence' | 'nudity' | 'scam' | 'other';
+  reason: 'spam' | 'harassment' | 'hate' | 'violence' | 'nudity' | 'scam' | 'plagiarism' | 'other';
   details?: string;
   status: 'pending' | 'reviewed' | 'action_taken' | 'dismissed';
   created_at: string;
