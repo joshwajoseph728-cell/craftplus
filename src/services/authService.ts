@@ -1,6 +1,6 @@
-﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Profile } from '../types/database.types';
-import { CURRENT_DEMO_USER } from '../lib/mockData';
+import { saveToStoredProfiles } from './profileService';
 
 const LOCAL_STORAGE_KEY_USER = 'vibesphere_active_user';
 
@@ -10,7 +10,12 @@ export const authService = {
       const stored = localStorage.getItem(LOCAL_STORAGE_KEY_USER);
       if (stored) {
         try {
-          return JSON.parse(stored);
+          const user = JSON.parse(stored);
+          if (user && user.id) {
+            saveToStoredProfiles(user);
+            return user;
+          }
+          return null;
         } catch {
           return null;
         }
@@ -28,7 +33,8 @@ export const authService = {
         .eq('id', session.user.id)
         .single();
 
-      if (error) throw error;
+      if (error || !data) return null;
+      saveToStoredProfiles(data as Profile);
       return data as Profile;
     } catch (err) {
       console.error('Error fetching current user:', err);
@@ -64,6 +70,7 @@ export const authService = {
         created_at: new Date().toISOString()
       };
       localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(newUser));
+      saveToStoredProfiles(newUser);
       return { user: newUser, error: null };
     }
 
@@ -114,6 +121,10 @@ export const authService = {
           .eq('id', data.user.id);
       }
 
+      if (profile) {
+        saveToStoredProfiles(profile as Profile);
+      }
+
       // Record audit signup in Supabase
       try {
         await supabase.from('auth_logs').insert({
@@ -140,7 +151,7 @@ export const authService = {
         username: username,
         full_name: username.replace(/[_.]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
         avatar_url: `https://api.dicebear.com/7.x/bottts/svg?seed=${username}`,
-        bio: 'Creator & Builder on CraftPlus âœ¨',
+        bio: 'Creator & Builder on CraftPlus ✨',
         website: '',
         location: '',
         is_private: false,
@@ -152,6 +163,7 @@ export const authService = {
         created_at: new Date().toISOString()
       };
       localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(userProfile));
+      saveToStoredProfiles(userProfile);
       return { user: userProfile, error: null };
     }
 
@@ -192,6 +204,9 @@ export const authService = {
         .single();
 
       if (profileError) return { user: null, error: profileError.message };
+      if (profile) {
+        saveToStoredProfiles(profile as Profile);
+      }
       return { user: profile as Profile, error: null };
     } catch (err: any) {
       return { user: null, error: err.message || 'Sign in failed' };
@@ -264,9 +279,11 @@ export const authService = {
 
   async updateProfile(userId: string, updates: Partial<Profile>): Promise<{ profile: Profile | null; error: string | null }> {
     if (!isSupabaseConfigured()) {
-      const current = (await this.getInitialUser()) || CURRENT_DEMO_USER;
+      const current = await this.getInitialUser();
+      if (!current) return { profile: null, error: 'No active user found' };
       const updated = { ...current, ...updates, updated_at: new Date().toISOString() };
       localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(updated));
+      saveToStoredProfiles(updated);
       return { profile: updated, error: null };
     }
 
@@ -279,6 +296,9 @@ export const authService = {
         .single();
 
       if (error) return { profile: null, error: error.message };
+      if (data) {
+        saveToStoredProfiles(data as Profile);
+      }
       return { profile: data as Profile, error: null };
     } catch (err: any) {
       return { profile: null, error: err.message || 'Profile update failed' };

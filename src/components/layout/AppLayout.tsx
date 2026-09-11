@@ -1,4 +1,5 @@
-﻿import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 import { MobileNav } from './MobileNav';
@@ -6,6 +7,7 @@ import { RightPanel } from './RightPanel';
 import { CreatePostModal } from '../create/CreatePostModal';
 import { ToastContainer } from '../ui/ToastContainer';
 import { usePosts } from '../../hooks/usePosts';
+import { useChat } from '../../contexts/ChatContext';
 
 import { cn } from '../../lib/utils';
 
@@ -20,6 +22,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
 }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const { addOptimisticPost } = usePosts();
+  const { activeUser } = useChat();
+  const location = useLocation();
+
+  const isMobileActiveChat = location.pathname.startsWith('/messages') && !!activeUser;
 
   return (
     <div className="min-h-screen bg-surface-light dark:bg-surface-dark text-slate-900 dark:text-slate-100 flex flex-col md:flex-row transition-colors">
@@ -27,12 +33,24 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
       <Sidebar onOpenCreate={() => setIsCreateModalOpen(true)} />
 
       {/* Main Column */}
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen pb-16 md:pb-0">
-        {/* Top Navbar */}
-        <Navbar onOpenCreate={() => setIsCreateModalOpen(true)} />
+      <div className={cn(
+        "flex-1 flex flex-col min-w-0 min-h-screen",
+        isMobileActiveChat ? "pb-0" : "pb-16 md:pb-0"
+      )}>
+        {/* Top Navbar (hidden on mobile during active DM) */}
+        <div className={isMobileActiveChat ? "hidden md:block" : "block"}>
+          <Navbar onOpenCreate={() => setIsCreateModalOpen(true)} />
+        </div>
 
-        <div className="flex-1 flex justify-center w-full">
-          <main className={cn('w-full', showRightPanel ? 'max-w-4xl px-4 py-6' : 'max-w-5xl p-0 md:px-4 md:py-6')}>
+        <div className="flex-1 flex justify-center w-full min-h-0">
+          <main className={cn(
+            'w-full',
+            isMobileActiveChat
+              ? 'p-0 h-[100dvh] md:h-auto md:max-w-5xl md:px-4 md:py-6'
+              : showRightPanel
+                ? 'max-w-4xl px-4 py-6'
+                : 'max-w-5xl p-0 md:px-4 md:py-6'
+          )}>
             {children}
           </main>
 
@@ -41,8 +59,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
         </div>
       </div>
 
-      {/* Mobile Bottom Navigation */}
-      <MobileNav onOpenCreate={() => setIsCreateModalOpen(true)} />
+      {/* Mobile Bottom Navigation (hidden when chatting inside active DM) */}
+      {!isMobileActiveChat && (
+        <MobileNav onOpenCreate={() => setIsCreateModalOpen(true)} />
+      )}
 
       {/* Global Post Creation Modal */}
       <CreatePostModal
@@ -56,4 +76,5 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
     </div>
   );
 };
+
 

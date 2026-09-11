@@ -1,58 +1,9 @@
-﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Comment, Profile } from '../types/database.types';
-import { INITIAL_PROFILES } from '../lib/mockData';
 
 const LOCAL_STORAGE_COMMENTS = 'vibesphere_comments';
 
-const INITIAL_MOCK_COMMENTS: Record<string, Comment[]> = {
-  'post-1': [
-    {
-      id: 'c-1',
-      user_id: 'user-002',
-      post_id: 'post-1',
-      content: 'The lighting reflection on the wet asphalt is unbelievable! ðŸ”¥',
-      likes_count: 8,
-      created_at: new Date(Date.now() - 3600000).toISOString(),
-      user: INITIAL_PROFILES[1],
-      is_liked: true,
-      replies: [
-        {
-          id: 'c-1-r1',
-          user_id: 'user-001',
-          post_id: 'post-1',
-          parent_comment_id: 'c-1',
-          content: 'Thank you Leo! Took about 45 mins waiting for the rain to taper off.',
-          likes_count: 3,
-          created_at: new Date(Date.now() - 2400000).toISOString(),
-          user: INITIAL_PROFILES[0],
-          is_liked: false
-        }
-      ]
-    },
-    {
-      id: 'c-2',
-      user_id: 'user-003',
-      post_id: 'post-1',
-      content: 'Tokyo in the rain will forever be unmatched aesthetic.',
-      likes_count: 4,
-      created_at: new Date(Date.now() - 5400000).toISOString(),
-      user: INITIAL_PROFILES[2],
-      is_liked: false
-    }
-  ],
-  'post-2': [
-    {
-      id: 'c-3',
-      user_id: 'user-001',
-      post_id: 'post-2',
-      content: 'The titanium glass curves look insane. Which rendering engine did you use?',
-      likes_count: 5,
-      created_at: new Date(Date.now() - 7200000).toISOString(),
-      user: INITIAL_PROFILES[0],
-      is_liked: true
-    }
-  ]
-};
+const INITIAL_MOCK_COMMENTS: Record<string, Comment[]> = {};
 
 const getStoredComments = (postId: string): Comment[] => {
   const stored = localStorage.getItem(`${LOCAL_STORAGE_COMMENTS}_${postId}`);

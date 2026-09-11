@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../types/database.types';
 import { profileService } from '../../services/profileService';
@@ -118,11 +118,22 @@ export const AccountSearchModal: React.FC<AccountSearchModalProps> = ({ isOpen, 
             {loading && <span className="text-brand-500 animate-pulse">Searching...</span>}
           </div>
 
-          {displayedUsers.length === 0 ? (
+          {loading ? (
+            <div className="py-12 text-center space-y-2">
+              <div className="w-8 h-8 rounded-full border-2 border-brand-500 border-t-transparent animate-spin mx-auto" />
+              <p className="text-xs font-semibold text-slate-500">Searching for accounts...</p>
+            </div>
+          ) : displayedUsers.length === 0 ? (
             <div className="py-12 text-center space-y-2">
               <User className="w-8 h-8 text-slate-400 mx-auto" />
-              <p className="text-sm font-bold text-slate-800 dark:text-slate-200">No creators found</p>
-              <p className="text-xs text-slate-400">Try searching with different keywords or skills.</p>
+              <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
+                {query.trim() ? `No accounts found matching "${query}"` : 'No other creators registered yet'}
+              </p>
+              <p className="text-xs text-slate-400 max-w-xs mx-auto">
+                {query.trim()
+                  ? 'Try searching by their exact @username, full name, or skills like React, Figma, Python.'
+                  : 'Search for accounts by name, username, or skills using the search bar above.'}
+              </p>
             </div>
           ) : (
             displayedUsers.map((creator) => (

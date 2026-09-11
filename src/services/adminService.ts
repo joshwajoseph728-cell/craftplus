@@ -1,6 +1,7 @@
-﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Report } from '../types/database.types';
-import { INITIAL_REPORTS, INITIAL_PROFILES, INITIAL_POSTS } from '../lib/mockData';
+import { INITIAL_REPORTS, INITIAL_POSTS } from '../lib/mockData';
+import { getStoredProfiles } from './profileService';
 
 const LOCAL_STORAGE_REPORTS = 'vibesphere_reports';
 
@@ -24,12 +25,13 @@ const setStoredReports = (reports: Report[]) => {
 export const adminService = {
   async getPlatformStats() {
     if (!isSupabaseConfigured()) {
+      const storedUsers = getStoredProfiles();
       return {
-        totalUsers: 1420 + INITIAL_PROFILES.length,
-        totalPosts: 8520 + INITIAL_POSTS.length,
-        totalStories: 184,
+        totalUsers: storedUsers.length,
+        totalPosts: INITIAL_POSTS.length,
+        totalStories: 2,
         pendingReports: getStoredReports().filter(r => r.status === 'pending').length,
-        dailyActiveUsers: 842
+        dailyActiveUsers: Math.max(storedUsers.length, 1)
       };
     }
 

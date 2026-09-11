@@ -1,27 +1,38 @@
-﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Profile, Hashtag } from '../types/database.types';
-import { INITIAL_PROFILES, CURRENT_DEMO_USER, INITIAL_HASHTAGS } from '../lib/mockData';
+import { INITIAL_HASHTAGS } from '../lib/mockData';
 
 const LOCAL_STORAGE_PROFILES = 'vibesphere_profiles';
 const LOCAL_STORAGE_FOLLOWS = 'vibesphere_follows';
 
-const getStoredProfiles = (): Profile[] => {
+export const getStoredProfiles = (): Profile[] => {
   const stored = localStorage.getItem(LOCAL_STORAGE_PROFILES);
   if (stored) {
     try {
       return JSON.parse(stored);
     } catch {
-      return [CURRENT_DEMO_USER, ...INITIAL_PROFILES];
+      return [];
     }
   }
-  const initial = [CURRENT_DEMO_USER, ...INITIAL_PROFILES];
-  localStorage.setItem(LOCAL_STORAGE_PROFILES, JSON.stringify(initial));
-  return initial;
+  return [];
+};
+
+export const saveToStoredProfiles = (profile: Profile) => {
+  if (!profile || !profile.id) return;
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_PROFILES);
+    let profiles: Profile[] = raw ? JSON.parse(raw) : [];
+    profiles = profiles.filter(p => p.id !== profile.id && p.username.toLowerCase() !== profile.username.toLowerCase());
+    profiles.unshift(profile);
+    localStorage.setItem(LOCAL_STORAGE_PROFILES, JSON.stringify(profiles));
+  } catch (err) {
+    console.error('Error saving profile to storage:', err);
+  }
 };
 
 export const profileService = {
   async getProfileByUsername(username: string, currentUserId?: string): Promise<Profile | null> {
-    const cleanUsername = username.replace('@', '').toLowerCase();
+    const cleanUsername = username.replace('@', '').toLowerCase().trim();
 
     if (!isSupabaseConfigured()) {
       const profiles = getStoredProfiles();
@@ -52,7 +63,14 @@ export const profileService = {
         .ilike('username', cleanUsername)
         .single();
 
-      if (error || !data) return null;
+      if (error || !data) {
+        // Fallback to local storage
+        const profiles = getStoredProfiles();
+        const profile = profiles.find(p => p.username.toLowerCase() === cleanUsername);
+        return profile || null;
+      }
+
+      saveToStoredProfiles(data as Profile);
 
       const activeFollowers = (data.followers || []).filter((f: any) => f.status === 'active');
       const activeFollowing = (data.following || []).filter((f: any) => f.status === 'active');
@@ -67,7 +85,8 @@ export const profileService = {
       };
     } catch (err) {
       console.error('Error fetching profile:', err);
-      return null;
+      const profiles = getStoredProfiles();
+      return profiles.find(p => p.username.toLowerCase() === cleanUsername) || null;
     }
   },
 
@@ -120,57 +139,86 @@ export const profileService = {
 
   async searchUsersAndHashtags(query: string): Promise<{ users: Profile[]; hashtags: Hashtag[] }> {
     const q = query.toLowerCase().trim().replace(/^[@#]/, '');
+    const localProfiles = getStoredProfiles();
+
     if (!q) {
       return {
-        users: INITIAL_PROFILES.slice(0, 4),
+        users: localProfiles.slice(0, 6),
         hashtags: INITIAL_HASHTAGS.slice(0, 6)
       };
     }
 
+    const matchingLocal = localProfiles.filter(p =>
+      p.username.toLowerCase().includes(q) ||
+      p.full_name.toLowerCase().includes(q) ||
+      (p.skills && p.skills.some(s => s.toLowerCase().includes(q))) ||
+      (p.headline && p.headline.toLowerCase().includes(q)) ||
+      (p.bio && p.bio.toLowerCase().includes(q))
+    );
+
     if (!isSupabaseConfigured()) {
-      const allProfiles = getStoredProfiles();
-      const users = allProfiles.filter(p =>
-        p.username.toLowerCase().includes(q) ||
-        p.full_name.toLowerCase().includes(q)
-      );
       const hashtags = INITIAL_HASHTAGS.filter(h => h.name.toLowerCase().includes(q));
-      return { users, hashtags };
+      return { users: matchingLocal, hashtags };
     }
 
     try {
       const [usersRes, tagsRes] = await Promise.all([
-        supabase.from('profiles').select('*').or(`username.ilike.%${q}%,full_name.ilike.%${q}%`).limit(10),
-        supabase.from('hashtags').select('*').ilike('name', `%${q}%`).limit(10)
+        supabase
+          .from('profiles')
+          .select('*')
+          .or(`username.ilike.%${q}%,full_name.ilike.%${q}%,headline.ilike.%${q}%,bio.ilike.%${q}%`)
+          .limit(25),
+        supabase
+          .from('hashtags')
+          .select('*')
+          .ilike('name', `%${q}%`)
+          .limit(10)
       ]);
 
+      const map = new Map<string, Profile>();
+      (usersRes.data || []).forEach((u: Profile) => {
+        map.set(u.id, u);
+        saveToStoredProfiles(u);
+      });
+      matchingLocal.forEach((u: Profile) => map.set(u.id, u));
+
       return {
-        users: (usersRes.data || []) as Profile[],
+        users: Array.from(map.values()),
         hashtags: (tagsRes.data || []) as Hashtag[]
       };
     } catch (err) {
       console.error('Error during search:', err);
-      return { users: [], hashtags: [] };
+      return { users: matchingLocal, hashtags: [] };
     }
   },
 
   async getSuggestedUsers(currentUserId?: string): Promise<Profile[]> {
+    const local = getStoredProfiles().filter(p => p.id !== currentUserId);
+
     if (!isSupabaseConfigured()) {
-      const all = getStoredProfiles();
-      return all.filter(p => p.id !== currentUserId).slice(0, 8);
+      return local.slice(0, 8);
     }
 
     try {
-      let query = supabase.from('profiles').select('*').limit(8);
+      let query = supabase.from('profiles').select('*').limit(15);
       if (currentUserId) {
         query = query.neq('id', currentUserId);
       }
       const { data, error } = await query;
       if (error || !data || data.length === 0) {
-        return INITIAL_PROFILES.filter(p => p.id !== currentUserId).slice(0, 6);
+        return local.slice(0, 8);
       }
-      return data as Profile[];
+
+      const map = new Map<string, Profile>();
+      (data as Profile[]).forEach(p => {
+        map.set(p.id, p);
+        saveToStoredProfiles(p);
+      });
+      local.forEach(p => map.set(p.id, p));
+
+      return Array.from(map.values()).slice(0, 8);
     } catch {
-      return INITIAL_PROFILES.filter(p => p.id !== currentUserId).slice(0, 6);
+      return local.slice(0, 8);
     }
   }
 };

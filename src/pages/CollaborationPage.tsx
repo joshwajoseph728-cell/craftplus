@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { CollabOpportunity, Profile, ProjectCategory } from '../types/database.types';
-import { INITIAL_COLLAB_OPPORTUNITIES, INITIAL_PROFILES } from '../lib/mockData';
+import { INITIAL_COLLAB_OPPORTUNITIES } from '../lib/mockData';
 import { CollabRequestModal } from '../components/collaboration/CollabRequestModal';
 import { Modal } from '../components/ui/Modal';
 import { Button } from '../components/ui/Button';

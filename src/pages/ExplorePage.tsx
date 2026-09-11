@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { Post, Profile, Hashtag, ProjectCategory } from '../types/database.types';
 import { postService } from '../services/postService';
@@ -10,7 +10,7 @@ import { PostCard } from '../components/feed/PostCard';
 import { CollabRequestModal } from '../components/collaboration/CollabRequestModal';
 import { usePosts } from '../hooks/usePosts';
 import { useAuth } from '../contexts/AuthContext';
-import { INITIAL_HASHTAGS, INITIAL_PROFILES } from '../lib/mockData';
+import { INITIAL_HASHTAGS } from '../lib/mockData';
 import { useDebounce } from '../hooks/useDebounce';
 import {
   Compass,
@@ -55,7 +55,7 @@ export const ExplorePage: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [posts, setPosts] = useState<Post[]>([]);
-  const [creators, setCreators] = useState<Profile[]>(INITIAL_PROFILES);
+  const [creators, setCreators] = useState<Profile[]>([]);
   const [matchingUsers, setMatchingUsers] = useState<Profile[]>([]);
   const [matchingTags, setMatchingTags] = useState<Hashtag[]>([]);
   const [activeTag, setActiveTag] = useState(tagParam);
@@ -64,6 +64,14 @@ export const ExplorePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const { toggleLike, toggleSave, deletePost } = usePosts();
+
+  useEffect(() => {
+    const loadCreators = async () => {
+      const users = await profileService.getSuggestedUsers(currentUser?.id);
+      setCreators(users);
+    };
+    loadCreators();
+  }, [currentUser?.id]);
 
   useEffect(() => {
     if (tagParam) {
@@ -119,7 +127,7 @@ export const ExplorePage: React.FC = () => {
 
   // Extract all distinct skills across creators & posts
   const allSkillsMap: Record<string, number> = {};
-  INITIAL_PROFILES.forEach(p => {
+  creators.forEach(p => {
     p.skills?.forEach(s => {
       allSkillsMap[s] = (allSkillsMap[s] || 0) + 1;
     });

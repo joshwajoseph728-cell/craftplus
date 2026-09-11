@@ -1,6 +1,7 @@
-﻿import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Message, Conversation, Profile } from '../types/database.types';
-import { INITIAL_MESSAGES, INITIAL_PROFILES } from '../lib/mockData';
+import { INITIAL_MESSAGES } from '../lib/mockData';
+import { getStoredProfiles } from './profileService';
 
 const LOCAL_STORAGE_MESSAGES = 'vibesphere_messages';
 
@@ -26,15 +27,16 @@ export const messageService = {
     if (!isSupabaseConfigured()) {
       const messages = getStoredMessages();
       const userConvosMap = new Map<string, { otherUser: Profile; lastMessage: Message; unreadCount: number }>();
+      const storedProfiles = getStoredProfiles();
 
       messages.forEach(msg => {
         const isSender = msg.sender_id === currentUserId;
         const otherId = isSender ? msg.receiver_id : msg.sender_id;
-        const otherUser = INITIAL_PROFILES.find(p => p.id === otherId) || {
+        const otherUser = storedProfiles.find(p => p.id === otherId) || {
           id: otherId,
-          username: otherId,
-          full_name: 'VibeSphere User',
-          avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
+          username: otherId.replace('user-', ''),
+          full_name: otherId.replace('user-', ''),
+          avatar_url: `https://api.dicebear.com/7.x/bottts/svg?seed=${otherId}`,
           is_private: false,
           role: 'user',
           created_at: new Date().toISOString()
