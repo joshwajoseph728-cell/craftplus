@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authService } from '../services/authService';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -33,13 +33,15 @@ export const ForgotPasswordPage: React.FC = () => {
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden">
       <div className="relative z-10 w-full max-w-md bg-slate-900/90 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
         <div className="text-center space-y-2 mb-6">
-          <Link to="/" className="inline-flex items-center gap-2 mb-1">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-pink-600 p-[2px]">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-            </div>
-            <span className="font-display text-xl font-extrabold text-white">VibeSphere</span>
+          <Link to="/" className="inline-flex items-center gap-2.5 mb-1 group">
+            <img
+              src="/logo.png"
+              alt="CraftPlus Logo"
+              className="w-10 h-10 rounded-2xl object-contain shadow-md shadow-brand-500/30 group-hover:scale-105 transition-transform duration-200"
+            />
+            <span className="font-display text-2xl font-extrabold tracking-tight text-white flex items-center">
+              Craft<span className="bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
+            </span>
           </Link>
           <h1 className="text-xl font-bold font-display text-white">Reset Password</h1>
           <p className="text-xs text-slate-400">Enter your account email to receive a recovery link</p>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -121,14 +121,14 @@ export const SignupPage: React.FC = () => {
       <div className="relative z-10 w-full max-w-md bg-slate-900/90 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
         {/* Brand Header */}
         <div className="text-center space-y-2 mb-6">
-          <Link to="/" className="inline-flex items-center gap-2 mb-1">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-glow-brand">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-            </div>
-            <span className="font-display text-xl font-extrabold tracking-tight text-white">
-              Craft<span className="bg-gradient-to-r from-brand-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
+          <Link to="/" className="inline-flex items-center gap-2.5 mb-1 group">
+            <img
+              src="/logo.png"
+              alt="CraftPlus Logo"
+              className="w-10 h-10 rounded-2xl object-contain shadow-md shadow-brand-500/30 group-hover:scale-105 transition-transform duration-200"
+            />
+            <span className="font-display text-2xl font-extrabold tracking-tight text-white flex items-center">
+              Craft<span className="bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
             </span>
           </Link>
           <h1 className="text-xl font-bold font-display text-white">Join the Community</h1>

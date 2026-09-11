@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -25,14 +25,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCreate }) => {
       <header className="sticky top-0 z-30 w-full bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link to={user ? "/feed" : "/"} className="flex items-center gap-2.5 select-none shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-sm">
-              <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                <Activity className="w-5 h-5 text-white" />
-              </div>
-            </div>
-            <span className="font-display text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              Craft<span className="bg-gradient-to-r from-brand-500 via-pink-500 to-accent-500 bg-clip-text text-transparent">Pulse</span>
+          <Link to={user ? "/feed" : "/"} className="flex items-center gap-2.5 select-none shrink-0 group">
+            <img
+              src="/logo.png"
+              alt="CraftPlus Logo"
+              className="w-8 h-8 md:w-9 md:h-9 rounded-xl object-contain shadow-sm group-hover:scale-105 transition-transform duration-200"
+            />
+            <span className="font-display text-lg md:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Craft<span className="bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
             </span>
           </Link>
 

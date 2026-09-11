@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Post } from '../../types/database.types';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { Modal } from '../ui/Modal';
@@ -38,7 +38,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Post by @${post.user.username} on VibeSphere`,
+          title: `Project by @${post.user.username} on CraftPlus`,
           text: post.caption,
           url: postUrl
         });

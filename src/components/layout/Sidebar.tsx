@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
@@ -59,21 +59,27 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCreate }) => {
       <aside className="hidden md:flex flex-col justify-between w-64 lg:w-72 h-screen sticky top-0 px-4 py-6 border-r border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-surface-dark transition-colors select-none">
         {/* Brand Header */}
         <div className="space-y-4">
-          <Link to="/feed" className="flex items-center gap-3 px-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-glow-brand">
-              <div className="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center">
-                <Activity className="w-5 h-5 text-white" />
+          <div className="px-2">
+            <Link to="/feed" className="flex items-center gap-3 group">
+              <img
+                src="/logo.png"
+                alt="CraftPlus Logo"
+                className="w-10 h-10 rounded-2xl object-contain shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200"
+              />
+              <div>
+                <span className="font-display text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center">
+                  Craft<span className="bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
+                </span>
+                <p className="text-[9.5px] font-semibold tracking-wider text-slate-400 dark:text-slate-400 flex items-center gap-1">
+                  <span>Connect</span>
+                  <span className="text-sky-400 font-bold">•</span>
+                  <span>Create</span>
+                  <span className="text-pink-400 font-bold">•</span>
+                  <span>Share</span>
+                </p>
               </div>
-            </div>
-            <div>
-              <span className="font-display text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                Craft<span className="bg-gradient-to-r from-brand-500 via-pink-500 to-accent-500 bg-clip-text text-transparent">Plus</span>
-              </span>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Show what you create
-              </p>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
           {/* Mood Switcher Toggle */}
           <div className="px-2">

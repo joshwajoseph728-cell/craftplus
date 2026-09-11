@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { adminService } from '../../services/adminService';
@@ -58,7 +58,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
 
       if (!success) throw new Error(error || 'Failed to submit report');
 
-      showToast('Report Submitted', 'Thank you for keeping VibeSphere safe. Our team will review this promptly.', 'success');
+      showToast('Report Submitted', 'Thank you for keeping CraftPlus safe. Our team will review this promptly.', 'success');
       setDetails('');
       onClose();
     } catch (err: any) {

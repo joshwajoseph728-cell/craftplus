@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -40,13 +40,13 @@ export const LandingPage: React.FC = () => {
       <header className="relative z-20 border-b border-white/10 backdrop-blur-lg bg-slate-950/70">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-pink-600 to-accent-500 p-[2px] shadow-glow-brand">
-              <div className="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center">
-                <Activity className="w-5 h-5 text-white" />
-              </div>
-            </div>
-            <span className="font-display text-2xl font-extrabold tracking-tight text-white">
-              Craft<span className="bg-gradient-to-r from-brand-400 via-pink-500 to-accent-400 bg-clip-text text-transparent">Pulse</span>
+            <img
+              src="/logo.png"
+              alt="CraftPlus Logo"
+              className="w-10 h-10 rounded-2xl object-contain shadow-md shadow-brand-500/30"
+            />
+            <span className="font-display text-2xl font-extrabold tracking-tight text-white flex items-center">
+              Craft<span className="bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">Plus</span>
             </span>
           </div>
 
